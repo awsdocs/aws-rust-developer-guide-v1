@@ -9,7 +9,7 @@
 To make an API call using the AWS SDK for Rust \(the SDK\), you must supply credentials\. Two values comprise credentials: an Access Key ID and a Secret Access Key\. If you haven't created these two values, see the [Getting started with the AWS SDK for Rust](getting-started.md) topic for information on retrieving your credentials\.
 
 Once you have your credentials, the SDK can access them from any of the following locations \(when it finds credentials, the SDK quits looking further\):
-+ In the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
++ In the environment variables **AWS\_ACCESS\_KEY\_ID** and **AWS\_SECRET\_ACCESS\_KEY**\.
 + In [Web Identity Token credentials](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html) from the environment or container \(including EKS\)
 +  [ECS credentials \(IAM roles for tasks\)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
 + As entries in the **credentials** file in the **\.aws** directory in your home directory \(**\~/\.aws/credentials** on Linux, OS X, and Unix; **%userprofile%\\\.aws\\credentials** on Microsoft Windows\):
@@ -36,4 +36,4 @@ Since most resources live in a specific AWS Region, it's imperative that you sup
   [default]
   region=YOUR-DEFAULT-REGION
   ```
-+ In the environment variable `AWS_REGION`\.
++ In the environment variable **AWS\_REGION**\.

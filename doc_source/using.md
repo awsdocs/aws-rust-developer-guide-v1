@@ -13,6 +13,7 @@ This section describes:
 + The environment variables the SDK acknowledges, such as `AWS_REGION`
 + How to create a client, including specifying an AWS Region and credentials
 + How to page through responses
++ How to enable trace logging
 + How to use native TLS
 
 **Topics**

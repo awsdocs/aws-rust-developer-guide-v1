@@ -86,7 +86,7 @@ Let's create a simple Rust app that lists the first 10 of the objects in an Amaz
    cargo new hello_world --bin
    ```
 
-1. Install the **aws\-config** and **aws\-sdk\-s3** crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
+1. Install the [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-s3](https://crates.io/crates/aws-sdk-s3) crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
 
 1. Navigate into the **hello\_world** directory and edit **Cargo\.toml** to include these crates in **\[dependencies\]**, where *VERSION* is the version number you found on **crates\.io**:
 

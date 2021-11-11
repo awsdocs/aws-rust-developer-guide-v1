@@ -29,5 +29,6 @@ In addition to this guide, the following are valuable online resources for SDK d
 +  [AWS SDK for Rust Reference](https://awslabs.github.io/aws-sdk-rust/) 
 + [AWS Developer Tools Blog](https://aws.amazon.com/blogs/developer/)
 + GitHub
+  +  [Documentation Source](https://github.com/awsdocs/aws-rust-developer-guide-v1) 
   +  [SDK Source](https://github.com/awslabs/aws-sdk-rust) 
 + [The AWS Code Sample Catalog](http://docs.aws.amazon.com/code-samples/latest/catalog/)

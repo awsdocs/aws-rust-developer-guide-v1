@@ -10,7 +10,7 @@ The Rust SDK uses the [tracing](http://tracing.rs/) framework for logging\.
 
 ## Basic logging<a name="logger"></a>
 
-Since tracing works with the facade exposed by the [log](https://docs.rs/log/0.4.14/log) crate, you can use crates like [env\_logger](https://crates.io/crates/env_logger) to easily see logs emitted by the SDK.
+Since tracing works with the facade exposed by the [log](https://docs.rs/log/0.4.14/log) crate, you can use crates like [env\_logger](https://crates.io/crates/env_logger) to easily see log messages emitted by the SDK\.
 
 The first step is to add a reference to **env\_logger** in your **Cargo\.toml** file:
 
@@ -20,7 +20,7 @@ env_logger = "0.9.0"
 
 ### Full code listing<a name="logger-cargo-toml"></a>
 
-Here is the full listing of **Cargo\.toml**, where VERSION is the latest version of **aws\-config** and **aws\-sdk\-dynamodb** on [crates\.io](https://crates.io/)
+Here is the full listing of **Cargo\.toml**, where VERSION is the latest version of [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-dynamodb](https://crates.io/crates/aws-sdk-dynamodb) on **crates\.io**\.
 
 ```
 [package]
@@ -104,7 +104,7 @@ async fn main() -> Result<(), Error> {
 }
 ```
 
-When you run this code, you won't see any logging information\. To enable the display of logging information, use the following command which sets the log level to **debug**:
+When you run this code, you won't see any logging information\. To enable the display of logging information, use the following command, which sets the log level to **debug**:
 
 ```
 RUST_LOG=aws_config=debug cargo run
