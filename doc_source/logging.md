@@ -10,9 +10,9 @@ The Rust SDK uses the [tracing](http://tracing.rs/) framework for logging\.
 
 ## Basic logging<a name="logger"></a>
 
-Since tracing works with the facade exposed by the [log](https://docs.rs/log/0.4.14/log) crate, enabling using crates like **env\_logger** are a quick way to get logs\.
+Since tracing works with the facade exposed by the [log](https://docs.rs/log/0.4.14/log) crate, you can use crates like [env\_logger](https://crates.io/crates/env_logger) to easily see logs emitted by the SDK.
 
-The first step is to add a reference to **env\_logger** in your **cargo\.toml** file:
+The first step is to add a reference to **env\_logger** in your **Cargo\.toml** file:
 
 ```
 env_logger = "0.9.0"
@@ -20,7 +20,7 @@ env_logger = "0.9.0"
 
 ### Full code listing<a name="logger-cargo-toml"></a>
 
-Here is the full listing of **cargo\.toml**, where VERSION is the latest version of **aws\-config** and **aws\-sdk\-dynamodb** on [crates\.io](https://crates.io/)
+Here is the full listing of **Cargo\.toml**, where VERSION is the latest version of **aws\-config** and **aws\-sdk\-dynamodb** on [crates\.io](https://crates.io/)
 
 ```
 [package]
@@ -104,7 +104,7 @@ async fn main() -> Result<(), Error> {
 }
 ```
 
-When you run this code, you won't see any logging information\. To enable the display of logging information, use the following command line, which sets the logging level to **debug**:
+When you run this code, you won't see any logging information\. To enable the display of logging information, use the following command which sets the log level to **debug**:
 
 ```
 RUST_LOG=aws_config=debug cargo run
@@ -116,7 +116,7 @@ You can redirect the logs to the file **log\.txt** by using the following comman
 RUST_LOG=aws_config=debug cargo run 2> log.txt
 ```
 
-## Trace logging<a name="tracing"></a>
+## Structured Logging: Tracking Spans and Events<a name="tracing"></a>
 
 Using **env\_logger** is fine for basic logging, however, the SDK also tracks spans and events\. To see this more detailed information, we recommend using tracing\-specific libraries, such as **tracing\_subscriber** or **tracing\_appender**\.
 
@@ -192,7 +192,7 @@ async fn main() -> Result<(), Error> {
 ```
 
 **Note**  
-If you only see info logs, make sure you have **env\-filter** enabled in your **Cargo\.toml** file:  
+If you only see info logs, make sure you have the **env\-filter** feature enabled in your **Cargo\.toml** file:  
 
 ```
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
