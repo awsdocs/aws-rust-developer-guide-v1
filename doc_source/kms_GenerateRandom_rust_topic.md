@@ -6,7 +6,7 @@
 
 # Create a random byte string<a name="kms_GenerateRandom_rust_topic"></a>
 
-The following code example shows how to create a random byte string
+The following code example shows how to create a random byte string\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

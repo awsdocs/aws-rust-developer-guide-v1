@@ -6,7 +6,7 @@
 
 # Decrypt ciphertext and then reencrypt it<a name="kms_ReEncrypt_rust_topic"></a>
 
-The following code example shows how to Decrypt and then reencrypt text
+The following code example shows how to decrypt and then reencrypt text\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

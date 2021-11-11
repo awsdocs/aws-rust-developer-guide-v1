@@ -12,7 +12,6 @@ This chapter describes how to get started with the AWS SDK for Rust \(the SDK\)\
 + [Prerequisites](#getting-started-prerequisites)
 + [Get an AWS account](#getting-started-step1)
 + [Get and store your access keys](#getting-started-step2)
-+ [Install service crates](#getting-started-step3)
 + [Create your first SDK app](#hello-world)
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
@@ -73,14 +72,6 @@ You can also specify the default AWS Region for your API requests in the **crede
 
 ```
 region=us-west-2
-```
-
-## Install service crates<a name="getting-started-step3"></a>
-
-Install individual service crates from [crates\.io](https://crates.io) using the cargo install command with the name of the service crate\. All of the SDK's service crates start with **aws\-sdk\-**, and end with a lower\-case version of the service name\. If you aren't sure about a crate name, search **crates\.io**\. The following command loads the crate for the Amazon S3 service:
-
-```
-cargo install aws-sdk-s3
 ```
 
 ## Create your first SDK app<a name="hello-world"></a>

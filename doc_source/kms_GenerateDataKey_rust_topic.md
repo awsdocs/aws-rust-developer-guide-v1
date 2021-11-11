@@ -6,7 +6,7 @@
 
 # Generate a data key<a name="kms_GenerateDataKey_rust_topic"></a>
 
-The following code example shows how to generate a data key
+The following code example shows how to generate a data key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

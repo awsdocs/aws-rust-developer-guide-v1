@@ -6,7 +6,7 @@
 
 # List the KMS keys<a name="kms_ListKeys_rust_topic"></a>
 
-The following code example shows how to list the KMS keys
+The following code example shows how to list the KMS keys\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

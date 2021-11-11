@@ -6,7 +6,7 @@
 
 # Generate a symmetric data key<a name="kms_GenerateDataKeyWithoutPlaintext_rust_topic"></a>
 
-The following code example shows how to generate a symmetric data key
+The following code example shows how to generate a symmetric data key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

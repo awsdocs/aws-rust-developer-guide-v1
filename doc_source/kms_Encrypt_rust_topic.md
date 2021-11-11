@@ -6,7 +6,7 @@
 
 # Encrypt text using a KMS key<a name="kms_Encrypt_rust_topic"></a>
 
-The following code example shows how to encrypt text using a KMS key
+The following code example shows how to encrypt text using a KMS key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

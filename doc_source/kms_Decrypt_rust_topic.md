@@ -6,7 +6,7 @@
 
 # Decrypt a KMS key<a name="kms_Decrypt_rust_topic"></a>
 
-The following code example shows how to decrypt a KMS key
+The following code example shows how to decrypt a KMS key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.

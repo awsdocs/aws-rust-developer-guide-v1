@@ -20,4 +20,5 @@ This section describes:
 + [Environment variables](environment-variables.md)
 + [Creating a client](client.md)
 + [Paginating](paginating.md)
++ [Logging with the SDK](logging.md)
 + [Native TLS](tls.md)
