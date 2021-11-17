@@ -20,6 +20,8 @@ This section describes:
 + [Credentials and region](credentials.md)
 + [Environment variables](environment-variables.md)
 + [Creating a client](client.md)
++ [Custom endpoints](endpoints.md)
 + [Paginating](paginating.md)
++ [Custom retries](retries.md)
 + [Logging with the SDK](logging.md)
 + [Native TLS](tls.md)

@@ -13,10 +13,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
   
 
 ```
-async fn show_state(
-    client: &Client,
-    ids: Vec<String>,
-) -> Result<(), Error> {
+async fn show_state(client: &Client, ids: Vec<String>) -> Result<(), Error> {
     let resp = client
         .describe_instances()
         .set_instance_ids(Some(ids))

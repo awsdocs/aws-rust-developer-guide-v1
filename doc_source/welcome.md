@@ -4,7 +4,7 @@
 
 --------
 
-# What is the AWS SDK for Rust?<a name="what-is-sdk"></a>
+# What is the AWS SDK for Rust?<a name="welcome"></a>
 
 Rust is a systems programming language without a garbage collector focused on three goals: safety, speed, and concurrency\.
 

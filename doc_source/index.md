@@ -8,13 +8,16 @@ Amazon's trademarks and trade dress may not be used in connection with any produ
 
 -----
 ## Contents
-+ [What is the AWS SDK for Rust?](what-is-sdk.md)
++ [What is the AWS SDK for Rust?](welcome.md)
 + [Getting started with the AWS SDK for Rust](getting-started.md)
 + [Using the AWS SDK for Rust](using.md)
    + [Specifying your credentials and default region](credentials.md)
    + [Environment variables for the AWS SDK for Rust](environment-variables.md)
    + [Creating a service client in the AWS SDK for Rust](client.md)
+   + [Creating custom endpoints for the AWS SDK for Rust](endpoints.md)
+      + [S3 Object Lambda endpoint for the AWS SDK for Rust](s3-object-lambda.md)
    + [Paginating in the AWS SDK for Rust](paginating.md)
+   + [Custom retries for the AWS SDK for Rust](retries.md)
    + [Logging in the AWS SDK for Rust](logging.md)
    + [Using native TLS in the AWS SDK for Rust](tls.md)
 + [SDK for Rust code examples](rust_code_examples.md)

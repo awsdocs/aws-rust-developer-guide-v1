@@ -16,7 +16,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
 async fn make_role(client: &Client, policy_file: &str, name: &str) -> Result<(), Error> {
     // Read policy doc from file as a string
     let doc = fs::read_to_string(policy_file).expect("Unable to read file");
-  
+
     let resp = client
         .create_role()
         .assume_role_policy_document(doc)

@@ -13,10 +13,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
   
 
 ```
-async fn enable_monitoring(
-    client: &Client,
-    id: &str,
-) -> Result<(), Error> {
+async fn enable_monitoring(client: &Client, id: &str) -> Result<(), Error> {
     client.monitor_instances().instance_ids(id).send().await?;
 
     println!("Enabled monitoring");

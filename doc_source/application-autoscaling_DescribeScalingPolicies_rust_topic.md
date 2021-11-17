@@ -6,7 +6,7 @@
 
 # Describes scaling policies<a name="application-autoscaling_DescribeScalingPolicies_rust_topic"></a>
 
-The following code example shows how to describe scaling policies\.
+The following code example shows how to describe Application Auto Scaling scaling policies for the specified service namespace\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
