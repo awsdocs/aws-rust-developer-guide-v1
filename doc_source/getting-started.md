@@ -124,11 +124,6 @@ Let's create a simple Rust app that lists the first 10 of the objects in an Amaz
    }
    ```
 
-1. Double\-check your code is correct:
-
-   ```
-   cargo clippy -p hello_world -- --no-deps
-   ```
 
 1. Run the program:
 
