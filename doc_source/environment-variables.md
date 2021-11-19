@@ -138,7 +138,7 @@ The SDK recognizes the following additional environment variables\.
 
 AWS\_MAX\_ATTEMPTS  
 The maximum number of total attempts to use when dispatching a request\.  
-Setting this value 0 is invalid\. To disable retries, set this value to 1\. The default is 2\. See [Custom retries](retries.md)\.
+Setting this value 0 is invalid\. To disable retries, set this value to 1\. The default is 3\. See [Custom retries](retries.md)\.
 
 AWS\_RETRY\_MODE  
 The retry mode to use\.  

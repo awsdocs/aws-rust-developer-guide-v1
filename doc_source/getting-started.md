@@ -6,7 +6,7 @@
 
 # Getting started with the AWS SDK for Rust<a name="getting-started"></a>
 
-This chapter describes how to get started with the AWS SDK for Rust \(the SDK\)\. It includes information about getting an AWS account, installing the SDK, and creating a "Hello world" code example that lists all of your Amazon Simple Storage Service \(Amazon S3\) buckets in a region\.
+This chapter describes how to get started with the AWS SDK for Rust \(the SDK\)\. It includes information about getting an AWS account, installing the SDK, and creating a "Hello world" code example that lists all of your Amazon DynamoDB \(DynamoDB\) tables in a region\.
 
 **Topics**
 + [Prerequisites](#getting-started-prerequisites)
@@ -76,7 +76,7 @@ region=us-west-2
 
 ## Create your first SDK app<a name="hello-world"></a>
 
-Let's create a simple Rust app that lists the first 10 of the objects in an Amazon S3 bucket\.
+Let's create a simple Rust app that lists the first 10 of your Amazon S3 buckets\.
 
 1. Navigate to a location on your computer where you want to create the app\.
 
@@ -86,21 +86,21 @@ Let's create a simple Rust app that lists the first 10 of the objects in an Amaz
    cargo new hello_world --bin
    ```
 
-1. Install the [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-s3](https://crates.io/crates/aws-sdk-s3) crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
+1. Install the [aws\-config](https://crates.io/crates/aws-config) and [aws\-dynamodb](https://crates.io/crates/aws-dynamodb) crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
 
 1. Navigate into the **hello\_world** directory and edit **Cargo\.toml** to include these crates in **\[dependencies\]**, where *VERSION* is the version number you found on **crates\.io**:
 
    ```
    aws-config = "VERSION"
-   aws-sdk-s3 = "VERSION"
+   aws-dynamodb = "VERSION"
    tokio = { version = "1", features = ["full"] }
    ```
 
-1. Update **main\.rs** in the **src** directory to include the following code, which limits the number of objects returned to 10\. Don't forget to replace *yourbucketname* with the name of one of your buckets:
+1. Update **main\.rs** in the **src** directory to include the following code, which limits the number of buckets returned to 10\.
 
    ```
    use aws_config::meta::region::RegionProviderChain;
-   use aws_sdk_s3::{Client, Error};
+   use aws_dynamodb::{Client, Error};
    
    #[tokio::main]
    async fn main() -> Result<(), Error> {
@@ -108,17 +108,19 @@ Let's create a simple Rust app that lists the first 10 of the objects in an Amaz
        let config = aws_config::from_env().region(region_provider).load().await;
        let client = Client::new(&config);
    
-       // We list only 10 objects for now.
-       let resp = client
-           .list_objects_v2()
-           .bucket("yourbucketname")
-           .max_keys(10)
-           .send()
-           .await?;
+       // We list only 10 tables for now.
+       let resp = client.list_tables().limit(10).send().await?;
    
-       for object in resp.contents.unwrap_or_default() {
-           println!("{}", object.key.as_deref().unwrap_or_default());
+       println!("Tables:");
+   
+       let names = resp.table_names.unwrap_or_default();
+       let len = names.len();
+   
+       for name in names {
+           println!("  {}", name);
        }
+   
+       println!("Found {} tables", len);
    
        Ok(())
    }
@@ -136,4 +138,4 @@ Let's create a simple Rust app that lists the first 10 of the objects in an Amaz
    cargo run
    ```
 
-   You should see a list of at most 10 object names\. Later on, in the [Paginating in the AWS SDK for Rust](paginating.md) topic, we'll show you how to determine whether there are more object than the 10 listed, and how to paginate through the additional objects, 10 at a time\.
+   You should see a list of at most 10 table names\. Later on, in the [Paginating in the AWS SDK for Rust](paginating.md) topic, we'll show you how to determine whether there are more object than the 10 listed, and how to paginate through the additional tables, 10 at a time\.

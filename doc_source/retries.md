@@ -8,7 +8,7 @@
 
 This section describes how to modify the SDK to customize the number of times the SDK attempts a request before abandoning the request\.
 
-By default the SDK attempts a request two times before abandoning the request\. You can specify the number of retries by using an environment variable, the credentials file, or as an argument when constructing the client\. You must set the maximum number of retries to a value greater than zero, otherwise, the SDK panics\. If you set the maximum number of retries to 1, the SDK does not retry the request\.
+By default the SDK attempts a request three times before abandoning the request\. You can specify the number of attempts by using an environment variable, the credentials file, or as an argument when constructing the client\. You must set the maximum number of attempts to a value greater than zero, otherwise, the SDK panics\. If you set the maximum number of attempts to 1, the SDK does not retry the request\.
 
 ## Environment variable<a name="retries_env"></a>
 
