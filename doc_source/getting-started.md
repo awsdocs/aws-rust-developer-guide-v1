@@ -34,7 +34,7 @@ To access AWS resources, you need to use credentials for an IAM user that has re
 
 1. Then select **Add user**\.
 
-1. Enter the value **S3Reader** for **User name** and select **Programmatic access**\.
+1. Enter the value **S3Reader** for **User name** and select **Programmatic access**\. DYNAMODB!!!
 
 1. Select **Next: Permissions**\.
 
