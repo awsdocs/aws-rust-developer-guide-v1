@@ -15,6 +15,9 @@ There are a number of ways to unit test code written with the SDK\. In this topi
 Let’s look at a concrete example to illustrate\. The following example calls Amazon S3 over and over again with pagination in order to get the complete file size of a prefix in the bucket:
 
 ```
+// This allows us to refer to the S3 SDK as `s3` for the rest of this example
+use aws_sdk_s3 as s3;
+
 async fn determine_prefix_file_size(
     s3: s3::Client,
     bucket: &str,
