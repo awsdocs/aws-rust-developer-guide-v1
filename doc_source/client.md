@@ -14,7 +14,8 @@ You can also supply a region an argument to the client object\. Most of the [SDK
 
 ```
 use aws_config::meta::region::RegionProviderChain;
-    
+use aws_sdk_<SERVICENAME>::Client;
+
 let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
 let config = aws_config::from_env().region(region_provider).load().await;
 let client = Client::new(&config);
