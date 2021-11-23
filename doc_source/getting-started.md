@@ -91,6 +91,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
 1. Navigate into the **hello\_world** directory and edit **Cargo\.toml** to include these crates in **\[dependencies\]**, where *VERSION* is the version number you found on **crates\.io**:
 
    ```
+   [dependencies]
    aws-config = "VERSION"
    aws-dynamodb = "VERSION"
    tokio = { version = "1", features = ["full"] }
@@ -99,30 +100,26 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
 1. Update **main\.rs** in the **src** directory to include the following code\.
 
    ```
-   use aws_config::meta::region::RegionProviderChain;
-   use aws_dynamodb::{Client, Error};
-   
    #[tokio::main]
    async fn main() -> Result<(), Error> {
        let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
        let config = aws_config::from_env().region(region_provider).load().await;
        let client = Client::new(&config);
-   
+
        let resp = client.list_tables().send().await?;
-   
+
        println!("Tables:");
-   
-       let names = resp.table_names.unwrap_or_default();
-       let len = names.len();
-   
+
+       let names = resp.table_names().unwrap_or_default();
        for name in names {
            println!("  {}", name);
        }
-   
-       println!("Found {} tables", len);
-   
+
+       println!("Found {} tables", names.len());
+
        Ok(())
    }
+
    ```
 
 1. Run the program:
