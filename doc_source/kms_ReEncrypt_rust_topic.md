@@ -56,5 +56,5 @@ async fn reencrypt_string(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/kms#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [ReEncrypt](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

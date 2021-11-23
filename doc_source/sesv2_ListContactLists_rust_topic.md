@@ -28,5 +28,5 @@ async fn show_lists(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/ses#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
 +  For API details, see [ListContactLists](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

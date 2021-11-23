@@ -39,7 +39,7 @@ license = "YOUR-LICENSE"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = "1"
+tokio = { version = "1", features = ["full"] }
 serde = "1"
 log = "0.4"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }

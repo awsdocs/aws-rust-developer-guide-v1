@@ -22,5 +22,5 @@ fn movies_in_year(client: &Client, table_name: &str, year: u16) -> Query {
         .expression_attribute_values(":yyyy", AttributeValue::N(year.to_string()))
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/dynamodb#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [Query](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

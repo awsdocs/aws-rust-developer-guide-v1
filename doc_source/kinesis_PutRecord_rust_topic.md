@@ -29,5 +29,5 @@ async fn add_record(client: &Client, stream: &str, key: &str, data: &str) -> Res
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/kinesis#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [PutRecord](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

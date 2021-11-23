@@ -26,5 +26,5 @@ async fn update_group(client: &Client, name: &str, size: i32) -> Result<(), Erro
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/autoscaling#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [UpdateAutoScalingGroup](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

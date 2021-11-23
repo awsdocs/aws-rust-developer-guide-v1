@@ -34,5 +34,5 @@ async fn make_parameter(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/ssm#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ssm#code-examples)\. 
 +  For API details, see [PutParameter](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

@@ -29,5 +29,5 @@ async fn show_endpoints(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/mediapackage#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/mediapackage#code-examples)\. 
 +  For API details, see [ListOriginEndpoints](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

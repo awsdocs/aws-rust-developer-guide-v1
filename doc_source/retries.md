@@ -58,7 +58,7 @@ To override the retry configuration for a service client, specify the retry conf
         // Start with the shared environment configuration.
         config::Builder::from(&shared_config)
             // Set max attempts.
-            // If my_tries is 1, there are no retries.
+            // If tries is 1, there are no retries.
             .retry_config(RetryConfig::new().with_max_attempts(tries))
             .build(),
     );

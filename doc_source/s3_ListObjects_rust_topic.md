@@ -23,5 +23,5 @@ async fn show_objects(client: &Client, bucket: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/s3#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [ListObjects](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

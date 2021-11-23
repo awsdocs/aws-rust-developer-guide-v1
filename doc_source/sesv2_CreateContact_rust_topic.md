@@ -26,5 +26,5 @@ async fn add_contact(client: &Client, list: &str, email: &str) -> Result<(), Err
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/ses#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
 +  For API details, see [CreateContact](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

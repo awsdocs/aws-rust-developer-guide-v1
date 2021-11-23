@@ -29,5 +29,5 @@ async fn make_role(client: &Client, policy_file: &str, name: &str) -> Result<(),
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/iam#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
 +  For API details, see [CreateRole](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

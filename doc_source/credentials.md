@@ -24,6 +24,7 @@ Once you have your credentials, the SDK can access them from any of the followin
 ## Specifying a region<a name="credentials-region"></a>
 
 Since most resources live in a specific AWS Region, it's imperative that you supply the correct region for the resource when using the SDK\. Much as the SDK searches for credentials in a specific order, so does it search for a region\. The SDK looks in the following order for a default region:
++ In the environment variable **AWS\_REGION**\.
 + As an entry in the **credentials** file in the **\.aws** directory in your home directory \(**\~/\.aws/credentials** on Linux, OS X, and Unix; **%userprofile%\\\.aws\\credentials** on Microsoft Windows\):
 
   ```
@@ -36,4 +37,3 @@ Since most resources live in a specific AWS Region, it's imperative that you sup
   [default]
   region=YOUR-DEFAULT-REGION
   ```
-+ In the environment variable **AWS\_REGION**\.

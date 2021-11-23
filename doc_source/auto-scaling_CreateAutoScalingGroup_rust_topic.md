@@ -28,5 +28,5 @@ async fn create_group(client: &Client, name: &str, id: &str) -> Result<(), Error
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/autoscaling#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [CreateAutoScalingGroup](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

@@ -47,5 +47,5 @@ async fn does_table_exist(client: &Client, table: &str) -> Result<bool, Error> {
     Ok(table_exists)
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/dynamodb#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [ListTables](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

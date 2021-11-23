@@ -18,19 +18,19 @@ async fn list_groups(client: &Client) -> Result<(), Error> {
 
     println!("Groups:");
 
-    let groups = resp.auto_scaling_groups.unwrap_or_default();
+    let groups = resp.auto_scaling_groups().unwrap_or_default();
 
-    for group in &groups {
+    for group in groups {
         println!(
             "  {}",
-            group.auto_scaling_group_name.as_deref().unwrap_or_default()
+            group.auto_scaling_group_name().unwrap_or_default()
         );
         println!(
             "  ARN:          {}",
-            group.auto_scaling_group_arn.as_deref().unwrap_or_default()
+            group.auto_scaling_group_arn().unwrap_or_default()
         );
-        println!("  Minimum size: {}", group.min_size.unwrap_or_default());
-        println!("  Maximum size: {}", group.max_size.unwrap_or_default());
+        println!("  Minimum size: {}", group.min_size().unwrap_or_default());
+        println!("  Maximum size: {}", group.max_size().unwrap_or_default());
         println!();
     }
 
@@ -39,5 +39,5 @@ async fn list_groups(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/autoscaling#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [DescribeAutoScalingGroups](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

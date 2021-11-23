@@ -34,13 +34,13 @@ To access AWS resources, you need to use credentials for an IAM user that has re
 
 1. Then select **Add user**\.
 
-1. Enter the value **S3Reader** for **User name** and select **Programmatic access**\.
+1. Enter the value **DynamoReader** for **User name** and select **Programmatic access**\.
 
 1. Select **Next: Permissions**\.
 
 1. Under **Set permissions**, select **Attach existing policies directly**\.
 
-1. In the list of policies, select **AmazonS3ReadOnlyAccess**\.
+1. In the list of policies, select **AmazonDynamodbReadOnlyAccess**\.
 
 1. Select **Next: Tags**\.
 
@@ -76,7 +76,7 @@ region=us-west-2
 
 ## Create your first SDK app<a name="hello-world"></a>
 
-Let's create a simple Rust app that lists the first 10 of your Amazon S3 buckets\.
+Let's create a simple Rust app that lists your DynamoDB tables\.
 
 1. Navigate to a location on your computer where you want to create the app\.
 
@@ -96,7 +96,7 @@ Let's create a simple Rust app that lists the first 10 of your Amazon S3 buckets
    tokio = { version = "1", features = ["full"] }
    ```
 
-1. Update **main\.rs** in the **src** directory to include the following code, which limits the number of buckets returned to 10\.
+1. Update **main\.rs** in the **src** directory to include the following code\.
 
    ```
    use aws_config::meta::region::RegionProviderChain;
@@ -108,8 +108,7 @@ Let's create a simple Rust app that lists the first 10 of your Amazon S3 buckets
        let config = aws_config::from_env().region(region_provider).load().await;
        let client = Client::new(&config);
    
-       // We list only 10 tables for now.
-       let resp = client.list_tables().limit(10).send().await?;
+       let resp = client.list_tables().send().await?;
    
        println!("Tables:");
    
@@ -126,16 +125,10 @@ Let's create a simple Rust app that lists the first 10 of your Amazon S3 buckets
    }
    ```
 
-1. Double\-check your code is correct:
-
-   ```
-   cargo clippy -p hello_world -- --no-deps
-   ```
-
 1. Run the program:
 
    ```
    cargo run
    ```
 
-   You should see a list of at most 10 table names\. Later on, in the [Paginating in the AWS SDK for Rust](paginating.md) topic, we'll show you how to determine whether there are more object than the 10 listed, and how to paginate through the additional tables, 10 at a time\.
+   You should see a list of your table names\.

@@ -7,14 +7,15 @@
 # Testing your code<a name="testing"></a>
 
 This section describes a couple of approaches to unit testing code written with the SDK\.
-
-There are a number of ways to unit test code written with the SDK\. In this topic we discuss the following approaches\.
 + Create an object trait to abstract the SDK calls away so that they can be faked during unit tests\.
 + Create an enum to abstract the SDK calls away, similar to the previous approach\.
 
 Let’s look at a concrete example to illustrate\. The following example calls Amazon S3 over and over again with pagination in order to get the complete file size of a prefix in the bucket:
 
 ```
+// So we can refer to the S3 SDK as s3 for the rest of this example.
+use aws_sdk_s3 as s3;
+// ...
 async fn determine_prefix_file_size(
     s3: s3::Client,
     bucket: &str,
@@ -48,7 +49,7 @@ async fn determine_prefix_file_size(
 }
 ```
 
-The code that is sophisticated enough that a unit test is warranted, and the SDK is tightly coupled with it, which makes testing it difficult\.
+This code is sophisticated enough that a unit test is warranted, and the SDK is tightly coupled with it, which makes testing it difficult\.
 
 Let's look at the different approaches that we can use to unit test this code\.
 
@@ -323,57 +324,57 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
    ```
    async fn real_list_objects(
-           s3: s3::Client,
-           bucket: &str,
-           prefix: &str,
-           continuation_token: Option<String>,
-       ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
-           let response = s3
-               .list_objects_v2()
-               .bucket(bucket)
-               .prefix(prefix)
-               .set_continuation_token(continuation_token)
-               .send()
-               .await?;
-           Ok(ListObjectsResult {
-               objects: response
-                   .contents()
-                   .unwrap_or_default()
-                   .iter()
-                   .cloned()
-                   .collect(),
-               continuation_token: response.continuation_token().map(|t| t.to_string()),
-               has_more: response.is_truncated,
-           })
-       }
+       s3: s3::Client,
+       bucket: &str,
+       prefix: &str,
+       continuation_token: Option<String>,
+   ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
+       let response = s3
+           .list_objects_v2()
+           .bucket(bucket)
+           .prefix(prefix)
+           .set_continuation_token(continuation_token)
+           .send()
+           .await?;
+       Ok(ListObjectsResult {
+           objects: response
+               .contents()
+               .unwrap_or_default()
+               .iter()
+               .cloned()
+               .collect(),
+           continuation_token: response.continuation_token().map(|t| t.to_string()),
+           has_more: response.is_truncated,
+       })
+   }
    ```
 
 1. The test implementation mimics the Amazon S3 function’s behavior:
 
    ```
    #[cfg(test)]
-       fn test_list_objects(
-           pages: &[Vec<s3::model::Object>],
-           continuation_token: Option<String>,
-       ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
-           use std::str::FromStr;
-           let index = continuation_token
-               .map(|t| usize::from_str(&t).expect("valid token"))
-               .unwrap_or_default();
-           if pages.is_empty() {
-               Ok(ListObjectsResult {
-                   objects: Vec::new(),
-                   continuation_token: None,
-                   has_more: false,
-               })
-           } else {
-               Ok(ListObjectsResult {
-                   objects: pages[index].clone(),
-                   continuation_token: Some(format!("{}", index + 1)),
-                   has_more: index + 1 < pages.len(),
-               })
-           }
+   fn test_list_objects(
+       pages: &[Vec<s3::model::Object>],
+       continuation_token: Option<String>,
+   ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
+       use std::str::FromStr;
+       let index = continuation_token
+           .map(|t| usize::from_str(&t).expect("valid token"))
+           .unwrap_or_default();
+       if pages.is_empty() {
+           Ok(ListObjectsResult {
+               objects: Vec::new(),
+               continuation_token: None,
+               has_more: false,
+           })
+       } else {
+           Ok(ListObjectsResult {
+               objects: pages[index].clone(),
+               continuation_token: Some(format!("{}", index + 1)),
+               has_more: index + 1 < pages.len(),
+           })
        }
+   }
    ```
 
 1. Update the original implementation to use the enum instead of the Amazon S3 client:

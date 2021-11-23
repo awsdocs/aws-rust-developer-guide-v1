@@ -26,5 +26,5 @@ async fn remove_object(client: &Client, bucket: &str, key: &str) -> Result<(), E
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/s3#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [DeleteObject](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

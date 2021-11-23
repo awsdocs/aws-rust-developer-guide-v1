@@ -17,22 +17,22 @@ async fn show_apis(client: &Client) -> Result<(), Error> {
     let resp = client.get_rest_apis().send().await?;
 
     for api in resp.items.unwrap_or_default() {
-        println!("ID:          {}", api.id.as_deref().unwrap_or_default());
-        println!("Name:        {}", api.name.as_deref().unwrap_or_default());
+        println!("ID:          {}", api.id().unwrap_or_default());
+        println!("Name:        {}", api.name().unwrap_or_default());
         println!(
             "Description: {}",
-            api.description.as_deref().unwrap_or_default()
+            api.description().unwrap_or_default()
         );
         println!(
             "Version:     {}",
-            api.version.as_deref().unwrap_or_default()
+            api.version().unwrap_or_default()
         );
-        println!("Created:     {}", api.created_date.unwrap().to_chrono());
+        println!("Created:     {}", api.created_date().unwrap().to_chrono());
         println!();
     }
 
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/apigateway#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/apigateway#code-examples)\. 
 +  For API details, see [GetRestApis](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

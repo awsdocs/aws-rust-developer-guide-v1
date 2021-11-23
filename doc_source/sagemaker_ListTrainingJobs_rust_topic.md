@@ -40,5 +40,5 @@ async fn show_jobs(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/sagemaker#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
 +  For API details, see [ListTrainingJobs](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

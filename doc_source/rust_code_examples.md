@@ -9,6 +9,10 @@
 The following code examples show how to use AWS SDK for Rust with AWS\.
 
 **Contents**
++ [Cross\-service examples](rust_code_examples_cross_service.md)
+  + [Detect faces in an image](cross_DetectFaces_rust_topic.md)
+  + [Save EXIF and other image information](cross_DetectLabels_rust_topic.md)
+  + [Synthesises a text file into an audio file and converts that back to text](cross_Telephone_rust_topic.md)
 + [Examples](rust_code_examples_categorized.md)
   + [API Gateway examples](rust_api-gateway_code_examples.md)
   + [Application Auto Scaling examples](rust_application-autoscaling_code_examples.md)

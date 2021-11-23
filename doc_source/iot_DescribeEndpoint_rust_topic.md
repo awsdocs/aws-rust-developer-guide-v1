@@ -27,5 +27,5 @@ async fn show_address(client: &Client, endpoint_type: &str) -> Result<(), Error>
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/iot#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
 +  For API details, see [DescribeEndpoint](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

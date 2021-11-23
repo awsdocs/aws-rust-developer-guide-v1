@@ -26,5 +26,5 @@ async fn make_ledger(client: &Client, ledger: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/qldb#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
 +  For API details, see [CreateLedger](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

@@ -8,7 +8,36 @@
 
 This section describes how to handle cases where an API does not return all of the available objects in a request\.
 
-If you went through the [Create your first SDK app](getting-started.md#hello-world) topic, you created a Rust app that lists up to 10 tables in a region\. How do we know whether there are more than 10 tables? If there are more tables, how do we list the remaining tables? Let's start with answering the first question\.
+If you went through the [Create your first SDK app](getting-started.md#hello-world) topic, you created a Rust app that lists all of your tables in a region\.
+
+Let's modify that app to only list the first 10 tables, then show you how to detect whether there are more than 10 tables\. And finally, if there are more tables, how to list the remaining tables\. Here's the code for listing only the first 10 tables\.
+
+```
+use aws_config::meta::region::RegionProviderChain;
+use aws_dynamodb::{Client, Error};
+
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
+    let config = aws_config::from_env().region(region_provider).load().await;
+    let client = Client::new(&config);
+
+    let resp = client.list_tables().limit(10).send().await?;
+
+    println!("Tables:");
+
+    let names = resp.table_names.unwrap_or_default();
+    let len = names.len();
+
+    for name in names {
+        println!("  {}", name);
+    }
+
+    println!("Found {} tables", len);
+
+    Ok(())
+}
+```
 
 Add the following code after the loop that displays the table names in the **hello\_world** code example to the following:
 

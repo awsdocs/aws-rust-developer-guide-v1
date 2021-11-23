@@ -50,5 +50,5 @@ async fn show_buckets(strict: bool, client: &Client, region: &str) -> Result<(),
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/s3#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [ListBuckets](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

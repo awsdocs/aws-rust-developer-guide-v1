@@ -34,5 +34,5 @@ async fn query_cluster(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/rdsdata#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/rdsdata#code-examples)\. 
 +  For API details, see [ExecuteStatement](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

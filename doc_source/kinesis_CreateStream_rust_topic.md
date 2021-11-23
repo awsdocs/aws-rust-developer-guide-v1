@@ -26,5 +26,5 @@ async fn make_stream(client: &Client, stream: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/kinesis#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [CreateStream](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 

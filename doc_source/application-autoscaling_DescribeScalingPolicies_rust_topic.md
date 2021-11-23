@@ -19,16 +19,16 @@ async fn show_policies(client: &Client) -> Result<(), Error> {
         .service_namespace(ServiceNamespace::Ec2)
         .send()
         .await?;
-    if let Some(policies) = response.scaling_policies {
+    if let Some(policies) = response.scaling_policies() {
         println!("Auto Scaling Policies:");
         for policy in policies {
             println!("{:?}\n", policy);
         }
     }
-    println!("Next token: {:?}", response.next_token);
+    println!("Next token: {:?}", response.next_token());
 
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/.rust_alpha/applicationautoscaling#code-examples)\. 
++  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/applicationautoscaling#code-examples)\. 
 +  For API details, see [DescribeScalingPolicies](https://awslabs.github.io/aws-sdk-rust/) in *AWS SDK for Rust API reference*\. 
