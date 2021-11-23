@@ -26,11 +26,12 @@ On Microsoft Windows, where *ATTEMPTS* is a value greater than zero\.
 set AWS_MAX_ATTEMPTS=ATTEMPTS
 ```
 
-## In credentials<a name="retries_credentials"></a>
+## In AWS profiles<a name="retries_credentials"></a>
 
-Set the **max\_attempts** value \(`~/.aws/credentials` file on Linux, OS X or Unix; `%userprofile%\.aws\credentials` file on Microsoft Windows\) as follows, where *ATTEMPTS* is a value greater than zero\.
+Set the **max\_attempts** value \(`~/.aws/config` file on Linux, OS X or Unix; `%userprofile%\.aws\config` file on Microsoft Windows\) as follows, where *ATTEMPTS* is a value greater than zero\.
 
 ```
+[default]
 max_attempts=ATTEMPTS
 ```
 
