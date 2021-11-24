@@ -17,11 +17,3 @@ For data protection purposes, we recommend that you protect AWS account credenti
 + If you require FIPS 140\-2 validated cryptographic modules when accessing AWS through a command line interface or an API, use a FIPS endpoint\. For more information about the available FIPS endpoints, see [Federal Information Processing Standard \(FIPS\) 140\-2](http://aws.amazon.com/compliance/fips/)\.
 
 We strongly recommend that you never put sensitive identifying information, such as your customers' account numbers, into free\-form fields such as a **Name** field\. This includes when you work with AWS SDK for Rust or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into AWS SDK for Rust or other services might get picked up for inclusion in diagnostic logs\. When you provide a URL to an external server, don’t include credentials information in the URL to validate your request to that server\.
-
-## Encryption at rest<a name="encryption-rest"></a>
-
-TBD
-
-## Encryption in transit<a name="encryption-transit"></a>
-
-TBD
