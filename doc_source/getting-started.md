@@ -113,7 +113,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
    
        println!("Tables:");
    
-       let names = resp.table_names.unwrap_or_default();
+       let names = resp.table_names().unwrap_or_default();
    
        for name in names {
            println!("  {}", name);
