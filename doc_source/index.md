@@ -22,7 +22,6 @@ Amazon's trademarks and trade dress may not be used in connection with any produ
    + [Paginating in the AWS SDK for Rust](paginating.md)
    + [Custom retries for the AWS SDK for Rust](retries.md)
    + [Logging in the AWS SDK for Rust](logging.md)
-   + [Using native TLS in the AWS SDK for Rust](tls.md)
    + [Testing your code](testing.md)
 + [SDK for Rust code examples](rust_code_examples.md)
    + [Cross-service examples using SDK for Rust](rust_code_examples_cross_service.md)

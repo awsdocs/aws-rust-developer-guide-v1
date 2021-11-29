@@ -10,36 +10,15 @@ This section describes how to handle cases where an API does not return all of t
 
 If you went through the [Create your first SDK app](getting-started.md#hello-world) topic, you created a Rust app that lists all of your tables in a region\.
 
-Let's modify that app to only list the first 10 tables, then show you how to detect whether there are more than 10 tables\. And finally, if there are more tables, how to list the remaining tables\. Here's the code for listing only the first 10 tables\.
+Let's modify that app to only list the first 10 tables, then show you how to detect whether there are more than 10 tables\. And finally, if there are more tables, how to list the remaining tables\. To list only the first 10 tables change the call to `list_tables` to the following\.
 
 ```
-use aws_config::meta::region::RegionProviderChain;
-use aws_dynamodb::{Client, Error};
-
-#[tokio::main]
-async fn main() -> Result<(), Error> {
-    let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
-    let config = aws_config::from_env().region(region_provider).load().await;
-    let client = Client::new(&config);
-
-    let resp = client.list_tables().limit(10).send().await?;
-
-    println!("Tables:");
-
-    let names = resp.table_names.unwrap_or_default();
-    let len = names.len();
-
-    for name in names {
-        println!("  {}", name);
-    }
-
-    println!("Found {} tables", len);
-
-    Ok(())
-}
+let resp = client.list_tables().limit(10).send().await?;
 ```
 
-Add the following code after the loop that displays the table names in the **hello\_world** code example to the following:
+Now when you run the program it only shows up to the first 10 tables\.
+
+Let's add a bit of code to detect when we have more than 10 tables\. Add the following code after the print statement that displays how many table names it found\.
 
 ```
 if resp.last_evaluated_table_name != None {
@@ -52,9 +31,20 @@ Run the program again\. If you see the *There are more tables\!* in the output, 
 Replace everything after creating the client with the following code\. Note that it prints the message `–- more –-` after every 10 tables:
 
 ```
-if resp.last_evaluated_table_name != None {
+let mut resp = client.list_tables().limit(10).send().await?;
+let names = resp.table_names.unwrap_or_default();
+
+let mut num_tables = names.len();
+
+println!("Tables:");
+
+for name in names {
+    println!("  {}", name);
+}
+
+while resp.last_evaluated_table_name != None {
     println!("-- more --");
-    let resp = client
+    resp = client
         .list_tables()
         .limit(10)
         .exclusive_start_table_name(
@@ -66,13 +56,11 @@ if resp.last_evaluated_table_name != None {
         .await?;
 
     let names = resp.table_names.unwrap_or_default();
-    let len = names.len();
+    num_tables += names.len();
 
     for name in names {
         println!("  {}", name);
     }
-
-    num_tables += len;
 }
 
 println!("Found {} tables", num_tables);

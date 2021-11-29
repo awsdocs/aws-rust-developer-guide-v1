@@ -17,5 +17,4 @@ This section provides information about the AWS SDK for Rust that span the AWS s
 + [Paginating](paginating.md)
 + [Custom retries](retries.md)
 + [Logging with the SDK](logging.md)
-+ [Native TLS](tls.md)
 + [Unit testing](testing.md)

@@ -93,7 +93,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
    ```
    [dependencies]
    aws-config = "VERSION"
-   aws-dynamodb = "VERSION"
+   aws-sdk-dynamodb = "VERSION"
    tokio = { version = "1", features = ["full"] }
    ```
 
@@ -101,7 +101,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
 
    ```
    use aws_config::meta::region::RegionProviderChain;
-   use aws_dynamodb::{Client, Error};
+   use aws_sdk_dynamodb::{Client, Error};
    
    #[tokio::main]
    async fn main() -> Result<(), Error> {
@@ -113,7 +113,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
    
        println!("Tables:");
    
-       let names = resp.table_names.unwrap_or_default();
+       let names = resp.table_names().unwrap_or_default();
    
        for name in names {
            println!("  {}", name);

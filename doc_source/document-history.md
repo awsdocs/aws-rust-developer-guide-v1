@@ -8,9 +8,9 @@
 
 This topic describes important changes to the AWS SDK for Rust Developer Guide over the course of its history\.
 
- **This documentation was last built on:** 2021\-10\-20
+ **This documentation was last built on:** 2021\-12\-2
 
 
 | Change | Description | Date | 
 | --- | --- | --- | 
-|  AWS SDK for Rust latest alpha release  |   [Latest alpha release](https://github.com/awslabs/aws-sdk-rust/releases/tag/v0.0.21-alpha)  |  18 October 2021  | 
+|  AWS SDK for Rust developer preview release  |   [Developer preview release](https://github.com/awslabs/aws-sdk-rust/releases)  |  2 December 2021  | 
