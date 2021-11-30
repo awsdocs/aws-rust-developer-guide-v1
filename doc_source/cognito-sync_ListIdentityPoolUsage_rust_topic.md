@@ -38,7 +38,7 @@ async fn show_pools(client: &Client) -> Result<(), Error> {
             );
             println!(
                 "  Last modified:       {}",
-                pool.last_modified_date().unwrap().to_chrono()
+                pool.last_modified_date().unwrap().to_chrono_utc()
             );
             println!();
         }
