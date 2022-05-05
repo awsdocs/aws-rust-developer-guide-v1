@@ -6,35 +6,19 @@
 
 # SDK for Rust code examples<a name="rust_code_examples"></a>
 
-The following code examples show how to use AWS SDK for Rust with AWS\.
+The code examples in this topic show you how to use the AWS SDK for Rust with AWS\.
 
-**Contents**
+The examples are divided into the following categories:
+
+**Single\-service actions**  
+Code excerpts that show you how to call individual service functions\.
+
+**Single\-service scenarios**  
+Code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
+
+**Cross\-service examples**  
+Sample applications that work across multiple AWS services\.
+
+**Topics**
++ [Single\-service actions and scenarios](rust_code_examples_categorized.md)
 + [Cross\-service examples](rust_code_examples_cross_service.md)
-  + [Detect faces in an image](cross_DetectFaces_rust_topic.md)
-  + [Save EXIF and other image information](cross_DetectLabels_rust_topic.md)
-  + [Synthesises a text file into an audio file and converts that back to text](cross_Telephone_rust_topic.md)
-+ [Examples](rust_code_examples_categorized.md)
-  + [API Gateway examples](rust_api-gateway_code_examples.md)
-  + [Application Auto Scaling examples](rust_application-autoscaling_code_examples.md)
-  + [AWS Batch examples](rust_batch_code_examples.md)
-  + [Amazon Cognito Identity Provider examples](rust_cognito-identity-provider_code_examples.md)
-  + [Amazon Cognito Sync examples](rust_cognito-sync_code_examples.md)
-  + [DynamoDB examples](rust_dynamodb_code_examples.md)
-  + [Amazon EBS examples](rust_ebs_code_examples.md)
-  + [Amazon EC2 examples](rust_ec2_code_examples.md)
-  + [Auto Scaling examples](rust_auto-scaling_code_examples.md)
-  + [IAM examples](rust_iam_code_examples.md)
-  + [AWS IoT examples](rust_iot_code_examples.md)
-  + [AWS KMS examples](rust_kms_code_examples.md)
-  + [Kinesis examples](rust_kinesis_code_examples.md)
-  + [MediaLive examples](rust_medialive_code_examples.md)
-  + [MediaPackage examples](rust_mediapackage_code_examples.md)
-  + [Amazon Polly examples](rust_polly_code_examples.md)
-  + [QLDB examples](rust_qldb_code_examples.md)
-  + [Amazon RDS Data Service examples](rust_rds-data_code_examples.md)
-  + [Amazon S3 examples](rust_s3_code_examples.md)
-  + [Amazon SES API v2 examples](rust_sesv2_code_examples.md)
-  + [Amazon SNS examples](rust_sns_code_examples.md)
-  + [Amazon SQS examples](rust_sqs_code_examples.md)
-  + [SageMaker examples](rust_sagemaker_code_examples.md)
-  + [Systems Manager examples](rust_ssm_code_examples.md)

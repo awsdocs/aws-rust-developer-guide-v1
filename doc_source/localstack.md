@@ -12,29 +12,29 @@ LocalStack is a cloud service emulator that runs in a single container on your c
 
 ## Cargo\.toml<a name="localstack-cargo"></a>
 
-Specify the SDK crates in `Cargo.toml`, where *VERSION* is the latest version of the crate on [crates\.io](https://crates.io/)\.
+Specify the SDK crates in `Cargo.toml`\. Note that this specifies to use the developer preview version of the crates\. Check [crates\.io](https://crates.io/) for the latest version\.
 
 ```
 [package]
 name = "localstack-example"
 version = "0.1.0"
+authors = ["Doug Schwartz <dougsch@amazon.com>"]
 edition = "2018"
 
 [dependencies]
-aws-sdk-sqs = "VERSION"
-aws-sdk-s3 = "VERSION"
-aws-config = "VERSION"
-aws-types = "VERSION"
-aws-smithy-http = "VERSION"
+aws-config = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-sdk-s3 = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-sdk-sqs = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-types = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-smithy-http = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
 tokio = { version = "1", features = ["full"] }
-tracing-subscriber = "0.2"
 http = "0.2"
+tracing-subscriber = { version = "0.3.5", features = ["env-filter"] }
 ```
 
 ## src/main\.rs<a name="localstack-main"></a>
 
 ```
-use aws_sdk_sqs::Region;
 use aws_smithy_http::endpoint::Endpoint;
 use http::Uri;
 use std::error::Error;
@@ -42,15 +42,41 @@ use std::error::Error;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     tracing_subscriber::fmt::init();
+
     let shared_config = aws_config::from_env().load().await;
     let sqs_client = sqs_client(&shared_config);
     let s3_client = s3_client(&shared_config);
 
-    let buckets = s3_client.list_buckets().send().await?;
-    println!("s3 buckets: {:?}", buckets.buckets().unwrap_or_default());
+    let resp = s3_client.list_buckets().send().await?;
+    let buckets = resp.buckets().unwrap_or_default();
+    let num_buckets = buckets.len();
 
-    let queues = sqs_client.list_queues().send().await?;
-    println!("SQS queues: {:?}", queues.queue_urls().unwrap_or_default());
+    println!("Buckets:");
+    for bucket in buckets {
+        println!("  {}", bucket.name().as_deref().unwrap_or_default());
+    }
+
+    println!();
+    println!("Found {} buckets.", num_buckets);
+    println!();
+
+    let repl = sqs_client.list_queues().send().await?;
+    let queues = repl.queue_urls().unwrap_or_default();
+    let num_queues = queues.len();
+
+    println!("Queue URLs:");
+    for queue in queues {
+        println!("  {}", queue);
+    }
+
+    println!();
+    println!("Found {} queues.", num_queues);
+    println!();
+
+    if use_localstack() {
+        println!("Using the local stack.");
+    }
+
     Ok(())
 }
 
@@ -64,7 +90,7 @@ fn localstack_endpoint() -> Endpoint {
     Endpoint::immutable(Uri::from_static("http://localhost:4566/"))
 }
 
-fn sqs_client(conf: &aws_types::config::Config) -> aws_sdk_sqs::Client {
+fn sqs_client(conf: &aws_types::SdkConfig) -> aws_sdk_sqs::Client {
     let mut sqs_config_builder = aws_sdk_sqs::config::Builder::from(conf);
     if use_localstack() {
         sqs_config_builder = sqs_config_builder.endpoint_resolver(localstack_endpoint())
@@ -72,7 +98,7 @@ fn sqs_client(conf: &aws_types::config::Config) -> aws_sdk_sqs::Client {
     aws_sdk_sqs::Client::from_conf(sqs_config_builder.build())
 }
 
-fn s3_client(conf: &aws_types::config::Config) -> aws_sdk_s3::Client {
+fn s3_client(conf: &aws_types::SdkConfig) -> aws_sdk_s3::Client {
     let mut s3_config_builder = aws_sdk_s3::config::Builder::from(conf);
     if use_localstack() {
         s3_config_builder = s3_config_builder.endpoint_resolver(localstack_endpoint());

@@ -22,6 +22,18 @@ To set the environment variable *MyVar* to *MyValue* Microsoft Windows:
 set MyVar=MyValue
 ```
 
+**Warning**  
+Be careful that you don't accidently include a space in an environment variable, especially when creating a default region\. For example, if you set:  
+
+```
+export AWS_REGION=" us-west-2"
+```
+And call an SDK function, you get an error message that there was an invalid character:  
+
+```
+ Unhandled(ConstructionFailure(EndpointResolutionError(InvalidUri(InvalidUriChar))))
+```
+
 The remainder of this topic describes the environment variables by type\.
 
 ## Environment variables for credentials<a name="environment-variables-credentials"></a>

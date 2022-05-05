@@ -20,7 +20,7 @@ env_logger = "0.9.0"
 
 ### Full code listing<a name="logger-cargo-toml"></a>
 
-Here is the full listing of **Cargo\.toml**, where VERSION is the latest version of [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-dynamodb](https://crates.io/crates/aws-sdk-dynamodb) on **crates\.io**\.
+Here is the full listing of **Cargo\.toml**, where the version numbers are the latest version of [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-dynamodb](https://crates.io/crates/aws-sdk-dynamodb) on **crates\.io**\.
 
 ```
 [package]
@@ -32,8 +32,8 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-aws-config = "VERSION"
-aws-sdk-dynamodb = "VERSION"
+aws-config = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-sdk-dynamodb = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
 env_logger = "0.9.0"
 structopt = { version = "0.3", default-features = false }
 tokio = { version = "1", features = ["full"] }
@@ -42,7 +42,7 @@ tokio = { version = "1", features = ["full"] }
 Then, in your Rust code, initialize the logger in the `main` function before you call any SDK operation:
 
 ```
-env_logger::init();
+    env_logger::init();
 ```
 
 ### Full code listing<a name="logger-code"></a>
@@ -92,7 +92,7 @@ async fn main() -> Result<(), Error> {
 
     println!("Tables:");
 
-    let names = resp.table_names.unwrap_or_default();
+    let names = resp.table_names().unwrap_or_default();
     let len = names.len();
 
     for name in names {
@@ -129,7 +129,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 Then, in your Rust code, initialize the logger in the `main` function before you call any SDK operation:
 
 ```
-tracing_subscriber::fmt::init();
+    tracing_subscriber::fmt::init();
 ```
 
 ### Full code listing<a name="tracing-code"></a>
@@ -179,7 +179,7 @@ async fn main() -> Result<(), Error> {
 
     println!("Tables:");
 
-    let names = resp.table_names.unwrap_or_default();
+    let names = resp.table_names().unwrap_or_default();
     let len = names.len();
 
     for name in names {
@@ -189,13 +189,6 @@ async fn main() -> Result<(), Error> {
     println!("Found {} tables", len);
     Ok(())
 }
-```
-
-**Note**  
-If you only see info logs, make sure you have the **env\-filter** feature enabled in your **Cargo\.toml** file:  
-
-```
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 ```
 
 ## Filtering log messages<a name="logging-filtering"></a>

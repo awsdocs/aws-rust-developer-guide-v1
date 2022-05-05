@@ -66,8 +66,6 @@ For this example, we’re going to create an app that receives a request contain
 Replace `src/main.rs` with the following code\.
 
 ```
-use log::{debug, error, info};
-
 #[derive(Deserialize)]
 struct Request {
     pub body: String,
@@ -98,10 +96,6 @@ type Response = Result<SuccessResponse, FailureResponse>;
 
 #[tokio::main]
 async fn main() -> Result<(), lambda_runtime::Error> {
-    // You can view the logs emitted by your app in Amazon CloudWatch.
-    tracing_subscriber::fmt::init();
-    debug!("logger has been set up");
-
     let func = handler_fn(handler);
     lambda_runtime::run(func).await?;
 
