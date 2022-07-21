@@ -7,7 +7,7 @@ The GitHub repository for the AWS SDK for Rust is at https://github.com/awslabs/
 
 ## ⚠ Important
 
-The Rust SDK is currently in alpha development.
+The Rust SDK is currently in developer preview.
 We strongly recommend that you do not use the Rust SDK in production,
 as there will likely be breaking changes between now and the v1 release.
 
