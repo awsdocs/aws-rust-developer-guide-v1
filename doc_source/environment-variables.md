@@ -115,7 +115,7 @@ The SDK recognizes the following environment variables related to your profile\.
 
 AWS\_CONFIG\_FILE  
 Overrides the default location of the `config` file\.  
-Default location: `~/aws/config` on Linux, OS X, or Unix; `%userprofile%\.aws\config` on Microsoft Windows\.
+Default location: `~/.aws/config` on Linux, OS X, or Unix; `%userprofile%\.aws\config` on Microsoft Windows\.
 
 AWS\_PROFILE  
 Overrides the name of the profile to use for all configuration settings\.  
@@ -123,7 +123,7 @@ Default name: **default**\.
 
 AWS\_SHARED\_CREDENTIALS\_FILE  
 Overrides the location of the `credentials` file\.  
-Default location: Default location: `~/aws/credentials` on Linux, OS X, or Unix; `%userprofile%\.aws\credentials` on Microsoft Windows\.
+Default location: Default location: `~/.aws/credentials` on Linux, OS X, or Unix; `%userprofile%\.aws\credentials` on Microsoft Windows\.
 
 ### Home directory resolution<a name="environment-variables-profile-home"></a>
 
