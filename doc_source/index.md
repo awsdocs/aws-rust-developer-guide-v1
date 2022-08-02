@@ -34,7 +34,7 @@ Amazon's trademarks and trade dress may not be used in connection with any produ
       + [DynamoDB examples using SDK for Rust](rust_dynamodb_code_examples.md)
       + [Amazon EBS examples using SDK for Rust](rust_ebs_code_examples.md)
       + [Amazon EC2 examples using SDK for Rust](rust_ec2_code_examples.md)
-      + [Auto Scaling examples using SDK for Rust](rust_auto-scaling_code_examples.md)
+      + [Amazon EC2 Auto Scaling examples using SDK for Rust](rust_auto-scaling_code_examples.md)
       + [Amazon ECR examples using SDK for Rust](rust_ecr_code_examples.md)
       + [Amazon ECS examples using SDK for Rust](rust_ecs_code_examples.md)
       + [Amazon EKS examples using SDK for Rust](rust_eks_code_examples.md)

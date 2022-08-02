@@ -25,6 +25,7 @@ The following code example shows how to create an Amazon ECS cluster\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
 ```
@@ -35,7 +36,6 @@ async fn make_cluster(client: &aws_sdk_ecs::Client, name: &str) -> Result<(), aw
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
 +  For API details, see [CreateCluster](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete a cluster<a name="ecs_DeleteCluster_rust_topic"></a>
@@ -44,6 +44,7 @@ The following code example shows how to delete an Amazon ECS cluster\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
 ```
@@ -57,7 +58,6 @@ async fn remove_cluster(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
 +  For API details, see [DeleteCluster](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List your clusters<a name="ecs_DescribeClusters_rust_topic"></a>
@@ -66,6 +66,7 @@ The following code example shows how to list your Amazon ECS clusters\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
 ```
@@ -82,5 +83,4 @@ async fn show_clusters(client: &aws_sdk_ecs::Client) -> Result<(), aws_sdk_ecs::
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
 +  For API details, see [DescribeClusters](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

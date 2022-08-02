@@ -25,6 +25,7 @@ The following code example shows how to create an AWS KMS key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -42,7 +43,6 @@ async fn make_key(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [CreateKey](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Create a random byte string<a name="kms_GenerateRandom_rust_topic"></a>
@@ -51,6 +51,7 @@ The following code example shows how to create a random byte string that is cryp
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -74,7 +75,6 @@ async fn make_string(client: &Client, length: i32) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [GenerateRandom](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Decrypt ciphertext<a name="kms_Decrypt_rust_topic"></a>
@@ -83,6 +83,7 @@ The following code example shows how to decrypt ciphertext that was encrypted by
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -114,7 +115,6 @@ async fn decrypt_key(client: &Client, key: &str, filename: &str) -> Result<(), E
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [Decrypt](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Encrypt text using a key<a name="kms_Encrypt_rust_topic"></a>
@@ -123,6 +123,7 @@ The following code example shows how to encrypt text using a KMS key\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -154,7 +155,6 @@ async fn encrypt_string(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [Encrypt](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Generate a plaintext data key for client\-side encryption<a name="kms_GenerateDataKey_rust_topic"></a>
@@ -163,6 +163,7 @@ The following code example shows how to generate a unique symmetric data key for
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -187,7 +188,6 @@ async fn make_key(client: &Client, key: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [GenerateDataKey](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Generate an encrypted data key<a name="kms_GenerateDataKeyWithoutPlaintext_rust_topic"></a>
@@ -196,6 +196,7 @@ The following code example shows how to generate an encrypted data key from an A
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -220,7 +221,6 @@ async fn make_key(client: &Client, key: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [GenerateDataKeyWithoutPlaintext](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List keys<a name="kms_ListKeys_rust_topic"></a>
@@ -229,6 +229,7 @@ The following code example shows how to list KMS keys\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -249,7 +250,6 @@ async fn show_keys(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [ListKeys](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Recencrypt ciphertext from one key to another<a name="kms_ReEncrypt_rust_topic"></a>
@@ -258,6 +258,7 @@ The following code example shows how to reencrypt ciphertext from one KMS key to
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
 ```
@@ -304,5 +305,4 @@ async fn reencrypt_string(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
 +  For API details, see [ReEncrypt](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

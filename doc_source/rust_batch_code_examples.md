@@ -25,6 +25,7 @@ The following code example shows how to describe one or more AWS Batch compute e
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/batch#code-examples)\. 
   
 
 ```
@@ -45,5 +46,4 @@ async fn show_envs(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/batch#code-examples)\. 
 +  For API details, see [DescribeComputeEnvironments](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

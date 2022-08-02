@@ -25,6 +25,7 @@ The following code example shows how to list Amazon SQS queues\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
 ```
@@ -63,7 +64,6 @@ async fn send_receive(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
 +  For API details, see [ListQueues](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Receive messages from a queue<a name="sqs_ReceiveMessage_rust_topic"></a>
@@ -72,6 +72,7 @@ The following code example shows how to receive messages from an Amazon SQS queu
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
 ```
@@ -110,7 +111,6 @@ async fn send_receive(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
 +  For API details, see [ReceiveMessage](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Send a message to a queue<a name="sqs_SendMessage_rust_topic"></a>
@@ -119,6 +119,7 @@ The following code example shows how to send a message to an Amazon SQS queue\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
 ```
@@ -157,5 +158,4 @@ async fn send_receive(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
 +  For API details, see [SendMessage](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

@@ -22,10 +22,11 @@ Each example includes a link to GitHub, where you can find instructions on how t
 
 ### Copy an object from one bucket to another<a name="s3_CopyObject_rust_topic"></a>
 
-The following code example shows how to copy an Amazon S3 object from one bucket to another\.
+The following code example shows how to copy an S3 object from one bucket to another\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -51,15 +52,15 @@ pub async fn copy_object(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [CopyObject](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Create a bucket<a name="s3_CreateBucket_rust_topic"></a>
 
-The following code example shows how to create an Amazon S3 bucket\.
+The following code example shows how to create an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -78,15 +79,15 @@ pub async fn create_bucket(client: &Client, bucket_name: &str, region: &str) -> 
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [CreateBucket](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete an empty bucket<a name="s3_DeleteBucket_rust_topic"></a>
 
-The following code example shows how to delete an empty Amazon S3 bucket\.
+The following code example shows how to delete an empty S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -96,15 +97,15 @@ pub async fn delete_bucket(client: &Client, bucket_name: &str) -> Result<(), Err
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [DeleteBucket](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete an object<a name="s3_DeleteObject_rust_topic"></a>
 
-The following code example shows how to delete an Amazon S3 object\.
+The following code example shows how to delete an S3 object\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -121,15 +122,15 @@ async fn remove_object(client: &Client, bucket: &str, key: &str) -> Result<(), E
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [DeleteObject](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete multiple objects<a name="s3_DeleteObjects_rust_topic"></a>
 
-The following code example shows how to delete multiple objects from an Amazon S3 bucket\.
+The following code example shows how to delete multiple objects from an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/S3#code-examples)\. 
   
 
 ```
@@ -159,15 +160,15 @@ pub async fn delete_objects(client: &Client, bucket_name: &str) -> Result<(), Er
     }
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/S3#code-examples)\. 
 +  For API details, see [DeleteObjects](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Get an object from a bucket<a name="s3_GetObject_rust_topic"></a>
 
-The following code example shows how to read data from an object in an Amazon S3 bucket\.
+The following code example shows how to read data from an object in an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -187,15 +188,15 @@ pub async fn download_object(client: &Client, bucket_name: &str, key: &str) -> R
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [GetObject](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Get the Region location for a bucket<a name="s3_GetBucketLocation_rust_topic"></a>
 
-The following code example shows how to get the Region location for an Amazon S3 bucket\.
+The following code example shows how to get the Region location for an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -236,15 +237,15 @@ async fn show_buckets(strict: bool, client: &Client, region: &str) -> Result<(),
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [GetBucketLocation](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List buckets<a name="s3_ListBuckets_rust_topic"></a>
 
-The following code example shows how to list Amazon S3 buckets\.
+The following code example shows how to list S3 buckets\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -285,15 +286,15 @@ async fn show_buckets(strict: bool, client: &Client, region: &str) -> Result<(),
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [ListBuckets](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List object versions in a bucket<a name="s3_ListObjectVersions_rust_topic"></a>
 
-The following code example shows how to list object versions in an Amazon S3 bucket\.
+The following code example shows how to list object versions in an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -309,15 +310,15 @@ async fn show_versions(client: &Client, bucket: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [ListObjectVersions](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List objects in a bucket<a name="s3_ListObjects_rust_topic"></a>
 
-The following code example shows how to list objects in an Amazon S3 bucket\.
+The following code example shows how to list objects in an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -331,15 +332,15 @@ pub async fn list_objects(client: &Client, bucket_name: &str) -> Result<(), Erro
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [ListObjects](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Upload an object to a bucket<a name="s3_PutObject_rust_topic"></a>
 
-The following code example shows how to upload an object to an Amazon S3 bucket\.
+The following code example shows how to upload an object to an S3 bucket\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
 ```
@@ -362,7 +363,6 @@ pub async fn upload_object(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 +  For API details, see [PutObject](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ## Scenarios<a name="w14aac14b9c57c15"></a>
@@ -380,6 +380,7 @@ The following code example shows how to:
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 Code for the binary crate which runs the scenario\.  
 
 ```
@@ -560,7 +561,6 @@ pub async fn create_bucket(client: &Client, bucket_name: &str, region: &str) -> 
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 + For API details, see the following topics in *AWS SDK for Rust API reference*\.
   + [CopyObject](https://docs.rs/releases/search?query=aws-sdk)
   + [CreateBucket](https://docs.rs/releases/search?query=aws-sdk)

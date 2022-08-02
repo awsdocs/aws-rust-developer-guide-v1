@@ -25,6 +25,7 @@ The following code example shows how to get Amazon Polly voices available for sy
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
 ```
@@ -49,7 +50,6 @@ async fn list_voices(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
 +  For API details, see [DescribeVoices](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List pronunciation lexicons<a name="polly_ListLexicons_rust_topic"></a>
@@ -58,6 +58,7 @@ The following code example shows how to list Amazon Polly pronunciation lexicons
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
 ```
@@ -90,7 +91,6 @@ async fn show_lexicons(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
 +  For API details, see [ListLexicons](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Store a pronunciation lexicon<a name="polly_PutLexicon_rust_topic"></a>
@@ -99,6 +99,7 @@ The following code example shows how to store an Amazon Polly pronunciation lexi
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
 ```
@@ -122,7 +123,6 @@ async fn make_lexicon(client: &Client, name: &str, from: &str, to: &str) -> Resu
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
 +  For API details, see [PutLexicon](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Synthesize speech from text<a name="polly_SynthesizeSpeech_rust_topic"></a>
@@ -131,6 +131,7 @@ The following code example shows how to synthesize speech from text with Amazon 
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
 ```
@@ -166,5 +167,4 @@ async fn synthesize(client: &Client, filename: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
 +  For API details, see [SynthesizeSpeech](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

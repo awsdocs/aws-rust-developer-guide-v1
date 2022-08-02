@@ -25,6 +25,7 @@ The following code example shows how to list SageMaker notebook instances\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
   
 
 ```
@@ -47,7 +48,6 @@ async fn show_instances(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
 +  For API details, see [ListNotebookInstances](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List training jobs<a name="sagemaker_ListTrainingJobs_rust_topic"></a>
@@ -56,6 +56,7 @@ The following code example shows how to list SageMaker training jobs\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
   
 
 ```
@@ -86,5 +87,4 @@ async fn show_jobs(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
 +  For API details, see [ListTrainingJobs](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

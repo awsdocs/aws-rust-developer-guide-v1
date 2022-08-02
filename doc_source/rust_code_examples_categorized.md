@@ -22,7 +22,7 @@ The following code examples show how to perform actions and implement common sce
 + [DynamoDB](rust_dynamodb_code_examples.md)
 + [Amazon EBS](rust_ebs_code_examples.md)
 + [Amazon EC2](rust_ec2_code_examples.md)
-+ [Auto Scaling](rust_auto-scaling_code_examples.md)
++ [Amazon EC2 Auto Scaling](rust_auto-scaling_code_examples.md)
 + [Amazon ECR](rust_ecr_code_examples.md)
 + [Amazon ECS](rust_ecs_code_examples.md)
 + [Amazon EKS](rust_eks_code_examples.md)

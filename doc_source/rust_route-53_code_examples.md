@@ -25,6 +25,7 @@ The following code example shows how to get a list of the public and private hos
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/route53#code-examples)\. 
   
 
 ```
@@ -52,5 +53,4 @@ async fn show_host_info(client: &aws_sdk_route53::Client) -> Result<(), aws_sdk_
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/route53#code-examples)\. 
 +  For API details, see [ListHostedZones](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

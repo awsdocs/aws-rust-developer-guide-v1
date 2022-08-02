@@ -25,6 +25,7 @@ The following code example shows how to create a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -67,7 +68,6 @@ async fn create_table(client: &Client, table: &str, key: &str) -> Result<(), Err
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [CreateTable](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete a table<a name="dynamodb_DeleteTable_rust_topic"></a>
@@ -76,6 +76,7 @@ The following code example shows how to delete a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -87,7 +88,6 @@ async fn delete_table(client: &Client, table: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [DeleteTable](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete an item from a table<a name="dynamodb_DeleteItem_rust_topic"></a>
@@ -96,6 +96,7 @@ The following code example shows how to delete an item from a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -118,7 +119,6 @@ async fn delete_item(client: &Client, table: &str, key: &str, value: &str) -> Re
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [DeleteItem](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List tables<a name="dynamodb_ListTables_rust_topic"></a>
@@ -127,6 +127,7 @@ The following code example shows how to list DynamoDB tables\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -161,7 +162,6 @@ async fn does_table_exist(client: &Client, table: &str) -> Result<bool, Error> {
     Ok(table_exists)
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [ListTables](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Put an item in a table<a name="dynamodb_PutItem_rust_topic"></a>
@@ -170,6 +170,7 @@ The following code example shows how to put an item in a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -209,7 +210,6 @@ async fn add_item(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [PutItem](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Query a table<a name="dynamodb_Query_rust_topic"></a>
@@ -218,6 +218,7 @@ The following code example shows how to query a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 Find the movies made in the specified year\.  
 
 ```
@@ -230,7 +231,6 @@ fn movies_in_year(client: &Client, table_name: &str, year: u16) -> Query {
         .expression_attribute_values(":yyyy", AttributeValue::N(year.to_string()))
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [Query](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Scan a table<a name="dynamodb_Scan_rust_topic"></a>
@@ -239,6 +239,7 @@ The following code example shows how to scan a DynamoDB table\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
 ```
@@ -260,5 +261,4 @@ async fn list_items(client: &Client, table: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 +  For API details, see [Scan](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

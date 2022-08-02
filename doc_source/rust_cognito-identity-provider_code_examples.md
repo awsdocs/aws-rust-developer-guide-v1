@@ -21,10 +21,11 @@ Each example includes a link to GitHub, where you can find instructions on how t
 
 ### List the user pools<a name="cognito-identity-provider_ListUserPools_rust_topic"></a>
 
-The following code example shows how to list the Amazon Cognito Identity Provider user pools\.
+The following code example shows how to list the Amazon Cognito user pools\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/cognitoidentityprovider#code-examples)\. 
   
 
 ```
@@ -53,5 +54,4 @@ async fn show_pools(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/cognitoidentityprovider#code-examples)\. 
 +  For API details, see [ListUserPools](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

@@ -25,6 +25,7 @@ The following code example shows how to create a Secrets Manager secret\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
 ```
@@ -41,7 +42,6 @@ async fn make_secret(client: &Client, name: &str, value: &str) -> Result<(), Err
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
 +  For API details, see [CreateSecret](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Get a secret value<a name="secrets-manager_GetSecretValue_rust_topic"></a>
@@ -50,6 +50,7 @@ The following code example shows how to get a Secrets Manager secret value\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
 ```
@@ -61,7 +62,6 @@ async fn show_secret(client: &Client, name: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
 +  For API details, see [GetSecretValue](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List secrets<a name="secrets-manager_ListSecrets_rust_topic"></a>
@@ -70,6 +70,7 @@ The following code example shows how to list Secrets Manager secrets\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
 ```
@@ -88,5 +89,4 @@ async fn show_secrets(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
 +  For API details, see [ListSecrets](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

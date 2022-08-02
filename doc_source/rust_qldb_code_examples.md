@@ -25,6 +25,7 @@ The following code example shows how to create a QLDB ledger\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
   
 
 ```
@@ -41,7 +42,6 @@ async fn make_ledger(client: &Client, ledger: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
 +  For API details, see [CreateLedger](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List your ledgers<a name="qldb_ListLedgers_rust_topic"></a>
@@ -50,24 +50,21 @@ The following code example shows how to list your QLDB ledgers\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
   
 
 ```
-async fn show_ledgers(client: &Client) -> Result<(), Error> {
-    let result = client.list_ledgers().send().await?;
+async fn show_ledgers(client: &QLDBClient) -> Result<(), Error> {
+    let mut pages = client.list_ledgers().into_paginator().page_size(2).send();
 
-    if let Some(ledgers) = result.ledgers() {
-        for ledger in ledgers {
-            println!("* {:?}", ledger);
-        }
-
-        if result.next_token().is_some() {
-            todo!("pagination is not yet demonstrated")
+    while let Some(page) = pages.next().await {
+        println!("* {:?}", page); //Prints an entire page of ledgers.
+        for ledger in page.unwrap().ledgers().unwrap() {
+            println!("* {:?}", ledger); //Prints the LedgerSummary of a single ledger.
         }
     }
 
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
 +  For API details, see [ListLedgers](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

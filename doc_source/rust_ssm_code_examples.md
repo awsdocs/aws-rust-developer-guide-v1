@@ -25,6 +25,7 @@ The following code example shows how to add a Systems Manager parameter\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ssm#code-examples)\. 
   
 
 ```
@@ -49,7 +50,6 @@ async fn make_parameter(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ssm#code-examples)\. 
 +  For API details, see [PutParameter](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Get parameters information<a name="ssm_DescribeParameters_rust_topic"></a>
@@ -58,6 +58,7 @@ The following code example shows how to get Systems Manager parameters informati
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ssm#code-examples)\. 
   
 
 ```
@@ -71,5 +72,4 @@ async fn show_parameters(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ssm#code-examples)\. 
 +  For API details, see [DescribeParameters](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

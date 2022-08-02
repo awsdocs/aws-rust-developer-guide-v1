@@ -25,6 +25,7 @@ The following code example shows how to create a Kinesis stream\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
 ```
@@ -41,7 +42,6 @@ async fn make_stream(client: &Client, stream: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [CreateStream](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete a stream<a name="kinesis_DeleteStream_rust_topic"></a>
@@ -50,6 +50,7 @@ The following code example shows how to delete a Kinesis stream\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
 ```
@@ -61,7 +62,6 @@ async fn remove_stream(client: &Client, stream: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [DeleteStream](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Describe a stream<a name="kinesis_DescribeStream_rust_topic"></a>
@@ -70,6 +70,7 @@ The following code example shows how to describe a Kinesis stream\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
 ```
@@ -91,7 +92,6 @@ async fn show_stream(client: &Client, stream: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [DescribeStream](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List streams<a name="kinesis_ListStreams_rust_topic"></a>
@@ -100,6 +100,7 @@ The following code example shows how to list information about one or more Kines
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
 ```
@@ -118,7 +119,6 @@ async fn show_streams(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [ListStreams](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Put data into a stream<a name="kinesis_PutRecord_rust_topic"></a>
@@ -127,6 +127,7 @@ The following code example shows how to put data into a Kinesis stream\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
 ```
@@ -146,5 +147,4 @@ async fn add_record(client: &Client, stream: &str, key: &str, data: &str) -> Res
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
 +  For API details, see [PutRecord](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

@@ -25,6 +25,7 @@ The following code example shows how to get AWS IoT endpoint information\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
   
 
 ```
@@ -42,7 +43,6 @@ async fn show_address(client: &Client, endpoint_type: &str) -> Result<(), Error>
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
 +  For API details, see [DescribeEndpoint](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List your things<a name="iot_ListThings_rust_topic"></a>
@@ -51,6 +51,7 @@ The following code example shows how to list your AWS IoT things\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
   
 
 ```
@@ -80,5 +81,4 @@ async fn show_things(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
 +  For API details, see [ListThings](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

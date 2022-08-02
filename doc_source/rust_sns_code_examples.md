@@ -25,6 +25,7 @@ The following code example shows how to create an Amazon SNS topic\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
 ```
@@ -39,7 +40,6 @@ async fn make_topic(client: &Client, topic_name: &str) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
 +  For API details, see [CreateTopic](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List topics<a name="sns_ListTopics_rust_topic"></a>
@@ -48,6 +48,7 @@ The following code example shows how to list Amazon SNS topics\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
 ```
@@ -63,7 +64,6 @@ async fn show_topics(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
 +  For API details, see [ListTopics](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Publish to a topic<a name="sns_Publish_rust_topic"></a>
@@ -72,6 +72,7 @@ The following code example shows how to publish messages to an Amazon SNS topic\
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
 ```
@@ -104,7 +105,6 @@ async fn subscribe_and_publish(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
 +  For API details, see [Publish](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Subscribe an email address to a topic<a name="sns_Subscribe_rust_topic"></a>
@@ -113,6 +113,7 @@ The following code example shows how to subscribe an email address to an Amazon 
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
 ```
@@ -145,5 +146,4 @@ async fn subscribe_and_publish(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
 +  For API details, see [Subscribe](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

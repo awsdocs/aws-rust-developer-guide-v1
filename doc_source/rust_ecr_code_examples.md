@@ -25,6 +25,7 @@ The following code example shows how to list the image IDs for a repository\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
   
 
 ```
@@ -53,7 +54,6 @@ async fn show_images(
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
 +  For API details, see [ListImages](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### List your repositories<a name="ecr_DescribeRepositories_rust_topic"></a>
@@ -62,6 +62,7 @@ The following code example shows how to list your repositories\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
   
 
 ```
@@ -80,5 +81,4 @@ async fn show_repos(client: &aws_sdk_ecr::Client) -> Result<(), aws_sdk_ecr::Err
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
 +  For API details, see [DescribeRepositories](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 

@@ -4,13 +4,13 @@
 
 --------
 
-# Auto Scaling examples using SDK for Rust<a name="rust_auto-scaling_code_examples"></a>
+# Amazon EC2 Auto Scaling examples using SDK for Rust<a name="rust_auto-scaling_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with Auto Scaling\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with Amazon EC2 Auto Scaling\.
 
-*Actions* are code excerpts that show you how to call individual Auto Scaling functions\.
+*Actions* are code excerpts that show you how to call individual Amazon EC2 Auto Scaling functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Auto Scaling functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon EC2 Auto Scaling functions\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
@@ -25,6 +25,7 @@ The following code example shows how to create an Auto Scaling group\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
 ```
@@ -43,7 +44,6 @@ async fn create_group(client: &Client, name: &str, id: &str) -> Result<(), Error
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [CreateAutoScalingGroup](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
 ### Delete a group<a name="auto-scaling_DeleteAutoScalingGroup_rust_topic"></a>
@@ -52,6 +52,7 @@ The following code example shows how to delete an Auto Scaling group\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
 ```
@@ -68,15 +69,15 @@ async fn delete_group(client: &Client, name: &str, force: bool) -> Result<(), Er
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [DeleteAutoScalingGroup](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
-### Get group information<a name="auto-scaling_DescribeAutoScalingGroups_rust_topic"></a>
+### Get information about groups<a name="auto-scaling_DescribeAutoScalingGroups_rust_topic"></a>
 
 The following code example shows how to get information about Auto Scaling groups\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
 ```
@@ -103,15 +104,15 @@ async fn list_groups(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [DescribeAutoScalingGroups](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
-### Update group configuration<a name="auto-scaling_UpdateAutoScalingGroup_rust_topic"></a>
+### Update a group<a name="auto-scaling_UpdateAutoScalingGroup_rust_topic"></a>
 
 The following code example shows how to update the configuration for an Auto Scaling group\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
 ```
@@ -128,5 +129,4 @@ async fn update_group(client: &Client, name: &str, size: i32) -> Result<(), Erro
     Ok(())
 }
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
 +  For API details, see [UpdateAutoScalingGroup](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
