@@ -8,29 +8,23 @@
 
 This section demonstrates how to use the SDK in your Lambda code\.
 
-You can use the SDK from within a Lambda function as you would in any other case, with a few added steps\. For further information about setting up a Rust\-based Lambda, see the [aws\-lambda\-rust\-runtime README](https://github.com/awslabs/aws-lambda-rust-runtime#deployment)\.
+You can use the SDK from within a Lambda function as you would in any other case, with a few added steps\. For further information about setting up a Rust\-based Lambda, see the [aws\-lambda\-rust\-runtime README](https://github.com/awslabs/aws-lambda-rust-runtime#2-deploying-the-binary-to-aws-lambda)\. 
 
-## Step 1: Create a Lambda<a name="lambda-step1"></a>
+## Step 1: Create a new project and add dependencies<a name="lambda-step1"></a>
 
-The first step is to [create a Lambda from the AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)\.
-
-## Step 2: Create a new project and add dependencies<a name="lambda-step2"></a>
-
-This topic shows how you can create a Rust app and upload it\.
-
-### Cargo\.toml<a name="lambda-step2-cargo.toml"></a>
-
-Create a new project with **cargo**, where *NAME* is the name of your Lambda app\.
+Create a new project with **cargo**:
 
 ```
-cargo new NAME
+cargo new s3-example
 ```
 
-Add the following dependencies to `Cargo.toml`, where *YOUR\-NAME* is your name, *YOUR\-EMAIL* is your email address, *YOUR\-LICENSE* is the license you use, and *VERSION* is the latest version of the SDK, which you can find on [crates\.io](https://crates.io/search?q=aws-sdk)\.
+Add the following dependencies to `Cargo.toml`, where *YOUR\-NAME* is your name, *YOUR\-EMAIL* is your email address, *YOUR\-LICENSE* is the license you use.
+
+Keep in mind that the dependency versions might need to be updated since the publication of this tutorial. You can find the latest version of the SDK on [crates\.io](https://crates.io/search?q=aws-sdk)\.
 
 ```
 [package]
-name = "NAME"
+name = "s3-example"
 version = "0.1.0"
 edition = "2021"
 authors = ["YOUR-NAME<YOUR-EMAIL>"]
@@ -39,112 +33,134 @@ license = "YOUR-LICENSE"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = { version = "1", features = ["full"] }
-serde = "1"
-log = "0.4"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-# NOTE: the following crate is not part of the SDK, but it is maintained by AWS.
-lambda_runtime = "0.4"
-aws-config = "VERSION"
-# We are using the Amazon Simple Storage Service (Amazon S3) crate in this example,
-# but you can use any SDK crate in your Lambda code.
-aws-sdk-s3 = "VERSION"
+aws-config = "0.49.0"
+aws-sdk-s3 = "0.19.0"
+chrono = "0.4.22"
+
+lambda_runtime = "0.6.1"
+serde = "1.0.136"
+serde_json = "1.0.85"
+tokio = { version = "1", features = ["macros"] }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }
 ```
 
 ### src/main\.rs<a name="lambda-step2-main.rs"></a>
 
-For this example, we’re going to create an app that receives a request containing some text and then stores that text in Amazon S3 with a name based on the Unix timestamp for when it was received\. It will then reply, reporting whether it succeeded or failed\. When writing a Lambda with Rust, you typically need to define the following\.
+We’re going to create an app that receives a request containing some text and then stores that text in Amazon S3 with a name based on the Unix timestamp for when it was received\. It will then reply, reporting whether it succeeded or failed\. When writing a Lambda with Rust, you typically need to define the following\.
 
 1. A struct that represents the data your Lambda will receive\. This struct must implement `serde::Deserialize`\.
 
 1. An async handler function that will perform whatever work you want your Lambda to be responsible for\. This function must have a specific inputs and outputs which we’ll cover in detail later on\.
 
-1. A main function that sets up logging and runs your handler function, routing new requests to it\. This is usually be an async function but it doesn’t have to be\.
+1. A main function that sets up logging and runs your handler function, routing new requests to it\.
 
-1. \(Optional\) A struct that represents data that your lambda returns\. This is typically a `Result` wrapping either a success response or a failure response but can be anything that implements `serde::Serialize`\.
+1. \(Optional\) A struct that represents data that your lambda returns\. This is typically a `Result` wrapping either a success response or a failure response. The success response can be anything that implements `serde::Serialize`\, while the failure response can be anything that implements `std::fmt::Debug + std::fmt::Display`.
 
 Replace `src/main.rs` with the following code\.
 
 ```
+use lambda_runtime::{service_fn, Error, LambdaEvent};
+use serde::{Deserialize, Serialize};
+
 #[derive(Deserialize)]
 struct Request {
-    pub body: String,
+    body: String,
 }
 
 #[derive(Debug, Serialize)]
-struct SuccessResponse {
-    pub body: String,
+struct Response {
+    req_id: String,
+    body: String,
 }
 
-#[derive(Debug, Serialize)]
-struct FailureResponse {
-    pub body: String,
-}
-
-// Implement Display for the Failure response so that we can then implement Error.
-impl std::fmt::Display for FailureResponse {
+impl std::fmt::Display for Response {
+    /// Display the response struct as a JSON string
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.body)
+        let err_as_json = serde_json::json!(self).to_string();
+        write!(f, "{}", err_as_json)
     }
 }
 
-// Implement Error for the FailureResponse so that we can `?` (try) the Response
-// returned by `lambda_runtime::run(func).await` in `fn main`.
-impl std::error::Error for FailureResponse {}
+impl std::error::Error for Response {}
 
-type Response = Result<SuccessResponse, FailureResponse>;
+async fn put_object(
+    s3_client: &aws_sdk_s3::Client,
+    bucket_name: &str,
+    event: LambdaEvent<Request>,
+) -> Result<Response, Error> {
+    tracing::info!("handling a request...");
+    // Generate a filename based on when the request was received.
+    let filename = format!("{}.txt", chrono::offset::Utc::now().timestamp());
 
-#[tokio::main]
-async fn main() -> Result<(), lambda_runtime::Error> {
-    let func = handler_fn(handler);
-    lambda_runtime::run(func).await?;
+    let response = s3_client
+        .put_object()
+        .bucket(bucket_name)
+        .body(event.payload.body.as_bytes().to_owned().into())
+        .key(&filename)
+        .content_type("text/plain")
+        .send()
+        .await;
 
-    Ok(())
+    match response {
+        Ok(_) => {
+            tracing::info!(
+                "Successfully stored the incoming request in S3 with the name '{}'",
+                &filename
+            );
+
+            // Return `Response` (it will be serialized to JSON automatically by the runtime)
+            Ok(Response {
+                req_id: event.context.request_id,
+                body: format!(
+                    "the lambda has successfully stored the your request in S3 with name '{}'",
+                    filename
+                ),
+            })
+        }
+        Err(err) => {
+            // In case of failure, log a detailed error to CloudWatch.
+            tracing::error!(
+                "failed to upload file '{}' to S3 with error: {}",
+                &filename,
+                err
+            );
+
+            Err(Box::new(Response {
+                req_id: event.context.request_id,
+                body: "The lambda encountered an error and your message was not saved".to_owned(),
+            }))
+        }
+    }
 }
 
-async fn handler(req: Request, _ctx: lambda_runtime::Context) -> Response {
-    info!("handling a request...");
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        // disable printing the name of the module in every log line.
+        .with_target(false)
+        // disabling time is handy because CloudWatch will add the ingestion time.
+        .without_time()
+        .init();
+
     let bucket_name = std::env::var("BUCKET_NAME")
         .expect("A BUCKET_NAME must be set in this app's Lambda environment variables.");
+    let bucket_ref = &bucket_name;
 
+    // Initialize the client here to be able to reuse it across
+    // different invocations.
+    //
     // No extra configuration is needed as long as your Lambda has
     // the necessary permissions attached to its role.
     let config = aws_config::load_from_env().await;
     let s3_client = aws_sdk_s3::Client::new(&config);
-    // Generate a filename based on when the request was received.
-    let filename = format!("{}.txt", time::OffsetDateTime::now_utc().unix_timestamp());
+    let client_ref = &s3_client;
 
-    let _ = s3_client
-        .put_object()
-        .bucket(bucket_name)
-        .body(req.body.as_bytes().to_owned().into())
-        .key(&filename)
-        .content_type("text/plain")
-        .send()
-        .await
-        .map_err(|err| {
-            // In case of failure, log a detailed error to CloudWatch.
-            error!(
-                "failed to upload file '{}' to S3 with error: {}",
-                &filename, err
-            );
-            // The sender of the request receives this message in response.
-            FailureResponse {
-                body: "The lambda encountered an error and your message was not saved".to_owned(),
-            }
-        })?;
-
-    info!(
-        "Successfully stored the incoming request in S3 with the name '{}'",
-        &filename
-    );
-
-    Ok(SuccessResponse {
-        body: format!(
-            "the lambda has successfully stored the your request in S3 with name '{}'",
-            filename
-        ),
-    })
+    lambda_runtime::run(service_fn(move |event: LambdaEvent<Request>| async move {
+        put_object(client_ref, bucket_ref, event).await
+    }))
+    .await
 }
 ```
 
@@ -152,76 +168,31 @@ async fn handler(req: Request, _ctx: lambda_runtime::Context) -> Response {
 
 This topic shows you how to package your app and upload it\.
 
-To be usable as a Lambda, your Rust app must be compiled for the **x86\_64\-unknown\-linux\-musl** target\. This typically means cross compiling the app\. You might encounter build errors if your app needs a certain dependency, but that dependency isn’t available on your system\.
+To be usable as a Lambda, your Rust app must be compiled for a Linux target, either X86-64, or ARM64\. This typically means cross compiling the app\. You might encounter build errors if your app needs a certain dependency, but that dependency isn’t available on your system\.
 
-This section shows two approaches to cross compiling that you can try\.
+This section uses [Cargo Lambda](https:://www.cargo-lambda.info) to build your function. Cargo Lambda is a project maintained by the community that works across Windows, MacOS, and Linux. Refer to [Cargo Lambda's installation instructions](https://www.cargo-lambda.info/guide/installation.html) to learn how to install this tool before continuing with the tutorial.
 
-### Rustup approach<a name="lambda-step3-x1"></a>
+The advantage of using this project is that you can cross-compile to either Linux target with one single tool.
 
-This approach uses the [Rustup](https://rustup.rs) toolchain to cross\-compile your app\.
+1. Build the app by running **cargo lambda build** in the project's root directory:
 
-**Note**  
-If you’re developing on a Mac, you must install the MUSL build tooling provided by [musl\-cross](https://github.com/FiloSottile/homebrew-musl-cross) and expose it as described in [this issue](https://github.com/awslabs/aws-sdk-rust/issues/186#issuecomment-898442351)\.
+```
+cargo lambda build --release --output-format zip
+```
 
-1. Install the **x86\_64\-unknown\-linux\-musl** toolchain with **Rustup** by running:
+1. If you want to compile your app to use AWS Graviton, just add the `--arm64` flag to the previous command:
 
-   ```
-   rustup target add x86_64-unknown-linux-musl
-   ```
+```
+cargo lambda build --release --output-format zip --arm64
+```
 
-1. Build the app by running:
+These previous commands will create a ZIP file with your application's binary in your app's target directory.
 
-   ```
-   cargo build --release --target x86_64-unknown-linux-musl
-   ```
-
-If this approach fails, try the next one\.
-
-### Container approach<a name="lambda-step3-x2"></a>
-
-This approach requires that you install either [Docker](https://www.docker.com) or [Podman](https://podman.io)\.
-
-1. Install rust\-embedded/cross as a cargo command by running:
-
-   ```
-   cargo install cross
-   ```
-
-1. Build the app by running:
-
-   ```
-   cross build --release --target x86_64-unknown-linux-musl
-   ```
-
-If your build is still failing at this point, it’s possible one of your dependencies isn’t compatible with MUSL Linux or requires some special setup\.
-
-### Packaging and uploading your app<a name="lambda-packaging"></a>
-
-1. Rename the app binary you just built to `bootstrap`\. On Linux, OS X, or Unix you can accomplish this by running:
-
-   ```
-   cp target/x86_64-unknown-linux-musl/release/your_lambda_app_name ./bootstrap
-   ```
-
-   On Microsoft Windows run:
-
-   ```
-   cp target\x86_64-unknown-linux-musl\release\your_lambda_app_name bootstrap
-   ```
-
-1. Place your renamed binary in a zip file\. On Linux, OS X, or Unix you can accomplish this by running:
-
-   ```
-   zip lambda.zip bootstrap
-   ```
-
-   On Microsoft Windows, right\-click **bootstrap** in Windows Explorer, select **Send to**, and then select **Compressed \(zipped\) folder**\. Rename **bootstrap\.zip** file as **lambda\.zip**\.
-
-1. Upload **lambda\.zip** to your lambda using any of the following\.
+1. Upload **target/lambda/s3-example/bootstrap\.zip** to AWS Lambda using any of the following\.
    + The [web console](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html)
    + The [AWS Command Line Interface \(AWS CLI\)](https://github.com/awslabs/aws-lambda-rust-runtime#aws-cli)
    + The [AWS Cloud Development Kit \(AWS CDK\)](https://aws.amazon.com/cdk)
 
 You’ve created and deployed a new Rust\-based Lambda that’s ready to begin accepting requests\. You can use [Amazon API Gateway's](https://aws.amazon.com/api-gateway) [Test feature](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html) to try it out\.
 
-This section has covered the process of building and packaging your app at a high level\. If you still have some unanswered questions, take a look at the detailed documentation in the **aws\-lambda\-rust\-runtime** repo under the [Deployment section](https://github.com/awslabs/aws-lambda-rust-runtime#deployment)\.
+This section has covered the process of building and packaging your app at a high level\. If you still have some unanswered questions, take a look at the detailed documentation in the **aws\-lambda\-rust\-runtime** repo under the [Deployment section](https://github.com/awslabs/aws-lambda-rust-runtime#2-deploying-the-binary-to-aws-lambda)\.
