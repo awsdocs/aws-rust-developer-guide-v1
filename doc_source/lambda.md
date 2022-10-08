@@ -35,7 +35,6 @@ license = "YOUR-LICENSE"
 [dependencies]
 aws-config = "0.49.0"
 aws-sdk-s3 = "0.19.0"
-chrono = "0.4.22"
 
 lambda_runtime = "0.6.1"
 serde = "1.0.136"
@@ -62,6 +61,7 @@ Replace `src/main.rs` with the following code\.
 ```
 use lambda_runtime::{service_fn, Error, LambdaEvent};
 use serde::{Deserialize, Serialize};
+use std::time::SystemTime;
 
 #[derive(Deserialize)]
 struct Request {
@@ -78,20 +78,26 @@ impl std::fmt::Display for Response {
     /// Display the response struct as a JSON string
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let err_as_json = serde_json::json!(self).to_string();
-        write!(f, "{}", err_as_json)
+        write!(f, "{err_as_json}")
     }
 }
 
 impl std::error::Error for Response {}
 
+#[tracing::instrument(skip(s3_client, event), fields(req_id = %event.context.request_id))]
 async fn put_object(
     s3_client: &aws_sdk_s3::Client,
     bucket_name: &str,
     event: LambdaEvent<Request>,
 ) -> Result<Response, Error> {
-    tracing::info!("handling a request...");
+    tracing::info!("handling a request");
+
     // Generate a filename based on when the request was received.
-    let filename = format!("{}.txt", chrono::offset::Utc::now().timestamp());
+    let timestamp = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .map(|n| n.as_secs())
+        .expect("SystemTime before UNIX EPOCH, clock might have gone backwards");
+    let filename = format!("{timestamp}.txt");
 
     let response = s3_client
         .put_object()
@@ -105,30 +111,29 @@ async fn put_object(
     match response {
         Ok(_) => {
             tracing::info!(
-                "Successfully stored the incoming request in S3 with the name '{}'",
-                &filename
+                filename = %filename,
+                "data successfully stored in S3",
             );
 
             // Return `Response` (it will be serialized to JSON automatically by the runtime)
             Ok(Response {
                 req_id: event.context.request_id,
                 body: format!(
-                    "the lambda has successfully stored the your request in S3 with name '{}'",
-                    filename
+                    "the lambda has successfully stored the your data in S3 with name '{filename}'"
                 ),
             })
         }
         Err(err) => {
             // In case of failure, log a detailed error to CloudWatch.
             tracing::error!(
-                "failed to upload file '{}' to S3 with error: {}",
-                &filename,
-                err
+                err = %err,
+                filename = %filename,
+                "failed to upload data to S3"
             );
 
             Err(Box::new(Response {
                 req_id: event.context.request_id,
-                body: "The lambda encountered an error and your message was not saved".to_owned(),
+                body: "The lambda encountered an error and your data was not saved".to_owned(),
             }))
         }
     }
@@ -146,7 +151,6 @@ async fn main() -> Result<(), Error> {
 
     let bucket_name = std::env::var("BUCKET_NAME")
         .expect("A BUCKET_NAME must be set in this app's Lambda environment variables.");
-    let bucket_ref = &bucket_name;
 
     // Initialize the client here to be able to reuse it across
     // different invocations.
@@ -155,10 +159,9 @@ async fn main() -> Result<(), Error> {
     // the necessary permissions attached to its role.
     let config = aws_config::load_from_env().await;
     let s3_client = aws_sdk_s3::Client::new(&config);
-    let client_ref = &s3_client;
 
-    lambda_runtime::run(service_fn(move |event: LambdaEvent<Request>| async move {
-        put_object(client_ref, bucket_ref, event).await
+    lambda_runtime::run(service_fn(|event: LambdaEvent<Request>| async {
+        put_object(&s3_client, &bucket_name, event).await
     }))
     .await
 }
