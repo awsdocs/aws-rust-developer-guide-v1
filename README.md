@@ -30,21 +30,21 @@ To contribute your own documentation fixes or updates, please use standard GitHu
 
 ## Code examples in the documentation
 
-The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/.rust_alpha).
+The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/rust_dev_preview).
 
 In addition to examples in Rust, you'll also find examples for each of the other AWS SDKs.
 If you find issues with any of the examples, you can submit Issues or fork the repository and submit a pull request!
 
-The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.rst).
+The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.md).
 
 ## Copyright and license
 
 All content in this repository, unless otherwise stated, is Copyright Amazon.com, Inc. or its affiliates. All rights reserved.
 
-Except where otherwise noted, this work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/) (the "License"). Use the preceding link for a human-readable summary of the license terms. The full license text is available at: http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode and in the LICENSE file accompanying this repository.
+Except where otherwise noted, this work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/) (the "License"). Use the preceding link for a human-readable summary of the license terms. The full license text is available at: http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode and in the [LICENSE](LICENSE) file accompanying this repository.
 
 ## License Summary
 
-The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
+The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the [LICENSE](LICENSE) file.
 
-The sample code within this documentation is made available under the MIT-0 license. See the LICENSE-SAMPLECODE file.
+The sample code within this documentation is made available under the MIT-0 license. See the [LICENSE-SAMPLECODE](LICENSE-SAMPLECODE) file.
