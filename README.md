@@ -30,12 +30,12 @@ To contribute your own documentation fixes or updates, please use standard GitHu
 
 ## Code examples in the documentation
 
-The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/rust_dev_preview).
+The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview).
 
 In addition to examples in Rust, you'll also find examples for each of the other AWS SDKs.
 If you find issues with any of the examples, you can submit Issues or fork the repository and submit a pull request!
 
-The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.md).
+The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/README.md).
 
 ## Copyright and license
 
