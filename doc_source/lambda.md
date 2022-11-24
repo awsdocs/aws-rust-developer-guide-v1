@@ -1,6 +1,6 @@
 --------
 
- *This is documentation for the developer preview release of the AWS SDK for Rust\. Do not use it in production as it is subject to breaking changes\.* 
+ *This is documentation for the developer preview release of the AWS SDK for Rust\. Do not use it in production as it is subject to breaking changes\.*
 
 --------
 
@@ -13,6 +13,8 @@ You can use the SDK from within a Lambda function as you would in any other case
 ## Step 1: Create a Lambda<a name="lambda-step1"></a>
 
 The first step is to [create a Lambda from the AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)\.
+
+For this specific example, we need to [configure the `BUCKET_NAME` environment variable](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) for the Lambda function, as well as [update the execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) to [allow creating objects in our S3 bucket](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-execution-role-s3-bucket/)\.
 
 ## Step 2: Create a new project and add dependencies<a name="lambda-step2"></a>
 
@@ -42,9 +44,10 @@ license = "YOUR-LICENSE"
 tokio = { version = "1", features = ["full"] }
 serde = "1"
 log = "0.4"
+chrono = "0.4"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # NOTE: the following crate is not part of the SDK, but it is maintained by AWS.
-lambda_runtime = "0.4"
+lambda_runtime = "0.7"
 aws-config = "VERSION"
 # We are using the Amazon Simple Storage Service (Amazon S3) crate in this example,
 # but you can use any SDK crate in your Lambda code.
@@ -66,6 +69,11 @@ For this example, we’re going to create an app that receives a request contain
 Replace `src/main.rs` with the following code\.
 
 ```
+use chrono::Utc;
+use lambda_runtime::{service_fn, LambdaEvent};
+use log::{info, error};
+use serde::{Deserialize, Serialize};
+
 #[derive(Deserialize)]
 struct Request {
     pub body: String,
@@ -96,13 +104,13 @@ type Response = Result<SuccessResponse, FailureResponse>;
 
 #[tokio::main]
 async fn main() -> Result<(), lambda_runtime::Error> {
-    let func = handler_fn(handler);
+    let func = service_fn(handler);
     lambda_runtime::run(func).await?;
 
     Ok(())
 }
 
-async fn handler(req: Request, _ctx: lambda_runtime::Context) -> Response {
+async fn handler(event: LambdaEvent<Request>) -> Response {
     info!("handling a request...");
     let bucket_name = std::env::var("BUCKET_NAME")
         .expect("A BUCKET_NAME must be set in this app's Lambda environment variables.");
@@ -112,12 +120,12 @@ async fn handler(req: Request, _ctx: lambda_runtime::Context) -> Response {
     let config = aws_config::load_from_env().await;
     let s3_client = aws_sdk_s3::Client::new(&config);
     // Generate a filename based on when the request was received.
-    let filename = format!("{}.txt", time::OffsetDateTime::now_utc().unix_timestamp());
+    let filename = format!("{}.txt", Utc::now().timestamp());
 
     let _ = s3_client
         .put_object()
         .bucket(bucket_name)
-        .body(req.body.as_bytes().to_owned().into())
+        .body(event.payload.body.as_bytes().to_owned().into())
         .key(&filename)
         .content_type("text/plain")
         .send()
@@ -130,7 +138,7 @@ async fn handler(req: Request, _ctx: lambda_runtime::Context) -> Response {
             );
             // The sender of the request receives this message in response.
             FailureResponse {
-                body: "The lambda encountered an error and your message was not saved".to_owned(),
+                body: format!("The lambda encountered an error and your message was not saved: {}", err),
             }
         })?;
 
@@ -160,8 +168,8 @@ This section shows two approaches to cross compiling that you can try\.
 
 This approach uses the [Rustup](https://rustup.rs) toolchain to cross\-compile your app\.
 
-**Note**  
-If you’re developing on a Mac, you must install the MUSL build tooling provided by [musl\-cross](https://github.com/FiloSottile/homebrew-musl-cross) and expose it as described in [this issue](https://github.com/awslabs/aws-sdk-rust/issues/186#issuecomment-898442351)\.
+**Note**
+If you’re developing on a Mac, you must install the MUSL build tooling provided by [musl\-cross](https://github.com/FiloSottile/homebrew-musl-cross) and expose it as described in [this issue](https://github.com/awslabs/aws-sdk-rust/issues/186#issuecomment-898442351)\. On Linux, you will need to install `musl`, `musl-dev`, or `musl-tools` depending on your distribution\.
 
 1. Install the **x86\_64\-unknown\-linux\-musl** toolchain with **Rustup** by running:
 
@@ -200,7 +208,7 @@ If your build is still failing at this point, it’s possible one of your depend
 1. Rename the app binary you just built to `bootstrap`\. On Linux, OS X, or Unix you can accomplish this by running:
 
    ```
-   cp target/x86_64-unknown-linux-musl/release/your_lambda_app_name ./bootstrap
+   cp target/x86_64-unknown-linux-musl/release/your_lambda_app_name bootstrap
    ```
 
    On Microsoft Windows run:
@@ -222,6 +230,10 @@ If your build is still failing at this point, it’s possible one of your depend
    + The [AWS Command Line Interface \(AWS CLI\)](https://github.com/awslabs/aws-lambda-rust-runtime#aws-cli)
    + The [AWS Cloud Development Kit \(AWS CDK\)](https://aws.amazon.com/cdk)
 
-You’ve created and deployed a new Rust\-based Lambda that’s ready to begin accepting requests\. You can use [Amazon API Gateway's](https://aws.amazon.com/api-gateway) [Test feature](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html) to try it out\.
+You’ve created and deployed a new Rust\-based Lambda that’s ready to begin accepting requests\. You can use [AWS Lambda’s](https://aws.amazon.com/lambda/) [Test feature](https://docs.aws.amazon.com/lambda/latest/dg/testing-functions.html) to try it out\. The following test payload can be used for our function:
 
-This section has covered the process of building and packaging your app at a high level\. If you still have some unanswered questions, take a look at the detailed documentation in the **aws\-lambda\-rust\-runtime** repo under the [Deployment section](https://github.com/awslabs/aws-lambda-rust-runtime#deployment)\.
+   ```
+   {"body":"Hello, Rust in Lambda!"}
+   ```
+
+This section has covered the process of building and packaging your app at a high level\. If you still have some unanswered questions, take a look at the detailed documentation in the [**aws\-lambda\-rust\-runtime** repository](https://github.com/awslabs/aws-lambda-rust-runtime)\.
