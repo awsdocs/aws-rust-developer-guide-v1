@@ -86,7 +86,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
    cargo new hello_world --bin
    ```
 
-1. Install the [aws\-config](https://crates.io/crates/aws-config) and [aws\-dynamodb](https://crates.io/crates/aws-dynamodb) crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
+1. Install the [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-dynamodb](https://crates.io/crates/aws-sdk-dynamodb) crates from **crates\.io**, as described in the previous section\. Note the version number of each crate\.
 
 1. Navigate into the **hello\_world** directory and edit **Cargo\.toml** to include these crates in **\[dependencies\]**, where *VERSION* is the version number you found on **crates\.io**:
 
@@ -103,6 +103,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
    use aws_config::meta::region::RegionProviderChain;
    use aws_sdk_dynamodb::{Client, Error};
    
+   /// Lists your DynamoDB tables in the default Region or us-east-1 if a default Region isn't set.
    #[tokio::main]
    async fn main() -> Result<(), Error> {
        let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
@@ -119,6 +120,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
            println!("  {}", name);
        }
    
+       println!();
        println!("Found {} tables", names.len());
    
        Ok(())

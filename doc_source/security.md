@@ -18,3 +18,4 @@ This documentation helps you understand how to apply the shared responsibility m
 + [Data protection](data-protection.md)
 + [Compliance validation](compliance-validation.md)
 + [Infrastructure security](infrastructure-security.md)
++ [Enforcing a minimum TLS version](enforcing-tls.md)

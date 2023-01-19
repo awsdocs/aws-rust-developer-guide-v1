@@ -13,9 +13,12 @@ This section describes a couple of approaches to unit testing code written with 
 Letâ€™s look at a concrete example to illustrate\. The following example calls Amazon S3 over and over again with pagination in order to get the complete file size of a prefix in the bucket:
 
 ```
-// So we can refer to the S3 SDK as s3 for the rest of this example.
+// So we can refer to the S3 package as s3 for the rest of the example.
 use aws_sdk_s3 as s3;
-// ...
+```
+
+```
+// Lists all objects in an S3 bucket with the given prefix, and adds up their size.
 async fn determine_prefix_file_size(
     s3: s3::Client,
     bucket: &str,
@@ -32,14 +35,14 @@ async fn determine_prefix_file_size(
             .send()
             .await?;
 
-        // Keep track of the size of the files we got back.
+        // Add up the file sizes we got back
         if let Some(contents) = response.contents() {
             for object in contents {
                 total_size_bytes += object.size() as usize;
             }
         }
 
-        // Handle pagination, and break out of the loop if there are no more pages.
+        // Handle pagination, and break the loop if there are no more pages
         next_token = response.continuation_token().map(|t| t.to_string());
         if !response.is_truncated() {
             break;
@@ -63,7 +66,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
    ```
    [dependencies]
-   async-trait = "0.1"
+   async-trait = "0.1.51"
    ```
 
 1. Next, lets define our trait\. Since we want to test the pagination and summation logic in our function, it makes sense to abstract out the call to `ListObjectsV2` from Amazon S3, so weâ€™ll make a trait for that\.
@@ -75,14 +78,14 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
        pub has_more: bool,
    }
    
-   #[async_trait::async_trait]
+   #[async_trait]
    pub trait ListObjects {
        async fn list_objects(
            &self,
            bucket: &str,
            prefix: &str,
            continuation_token: Option<String>,
-       ) -> ListObjectsResult;
+       ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>>;
    }
    ```
 
@@ -90,7 +93,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
    ```
    async fn determine_prefix_file_size(
-       // Take a reference to our trait object instead of the S3 client.
+       // Now we take a reference to our trait object instead of the S3 client
        list_objects_impl: &dyn ListObjects,
        bucket: &str,
        prefix: &str,
@@ -99,15 +102,15 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
        let mut total_size_bytes = 0;
        loop {
            let result = list_objects_impl
-               .list_objects(bucket, prefix, next_token.as_deref())
+               .list_objects(bucket, prefix, next_token.take())
                .await?;
    
-           // Keep track of the size of the files we got back.
+           // Add up the file sizes we got back
            for object in result.objects {
                total_size_bytes += object.size() as usize;
            }
    
-           // Handle pagination, and break out of the loop if there are no more pages.
+           // Handle pagination, and break the loop if there are no more pages
            next_token = result.continuation_token;
            if !result.has_more {
                break;
@@ -148,14 +151,9 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
                .send()
                .await?;
            Ok(ListObjectsResult {
-               objects: response
-                   .contents()
-                   .unwrap_or_default()
-                   .iter()
-                   .cloned()
-                   .collect(),
+               objects: response.contents().unwrap_or_default().to_vec(),
                continuation_token: response.continuation_token().map(|t| t.to_string()),
-               has_more: response.is_truncated,
+               has_more: response.is_truncated(),
            })
        }
    }
@@ -182,7 +180,6 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
            assert_eq!(self.expected_bucket, bucket);
            assert_eq!(self.expected_prefix, prefix);
    
-           use std::str::FromStr;
            let index = continuation_token
                .map(|t| usize::from_str(&t).expect("valid token"))
                .unwrap_or_default();
@@ -210,7 +207,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
    async fn test_single_page() {
        use s3::model::Object;
    
-       // Create a TestListObjects instance with just one page of two objects in it.
+       // Create a TestListObjects instance with just one page of two objects in it
        let fake = TestListObjects {
            expected_bucket: "some-bucket".into(),
            expected_prefix: "some-prefix".into(),
@@ -220,12 +217,12 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
                .collect()],
        };
    
-       // Run the code we want to test with it.
+       // Run the code we want to test with it
        let size = determine_prefix_file_size(&fake, "some-bucket", "some-prefix")
            .await
            .unwrap();
    
-       // Verify we got the correct total size back.
+       // Verify we got the correct total size back
        assert_eq!(7, size);
    }
    
@@ -233,7 +230,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
    async fn test_multiple_pages() {
        use s3::model::Object;
    
-       // Add a helper function for making pages.
+       // This time, we add a helper function for making pages
        fn make_page(sizes: &[i64]) -> Vec<Object> {
            sizes
                .iter()
@@ -241,14 +238,14 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
                .collect()
        }
    
-       // Create the TestListObjects instance with two pages of objects.
+       // Create the TestListObjects instance with two pages of objects now
        let fake = TestListObjects {
            expected_bucket: "some-bucket".into(),
            expected_prefix: "some-prefix".into(),
            pages: vec![make_page(&[5, 2]), make_page(&[3, 9])],
        };
    
-       // Test and verify.
+       // And now test and verify
        let size = determine_prefix_file_size(&fake, "some-bucket", "some-prefix")
            .await
            .unwrap();
@@ -267,10 +264,8 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 1. Add the following code to exclude the `Test` variant from the production build:
 
    ```
-   #[derive(Clone, Debug)]
    pub enum ListObjects {
        Real(s3::Client),
-       
        #[cfg(test)]
        Test {
            expected_bucket: String,
@@ -304,7 +299,6 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
                Self::Real(s3) => {
                    Self::real_list_objects(s3.clone(), bucket, prefix, continuation_token).await
                }
-               
                #[cfg(test)]
                Self::Test {
                    expected_bucket,
@@ -317,62 +311,57 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
                }
            }
        }
-   }
    ```
 
 1. Next, implement `Real` and `Test`, which are called from the previous match\. Letâ€™s start with the real implementation that wraps the Amazon S3 client and translates its output:
 
    ```
-   async fn real_list_objects(
-       s3: s3::Client,
-       bucket: &str,
-       prefix: &str,
-       continuation_token: Option<String>,
-   ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
-       let response = s3
-           .list_objects_v2()
-           .bucket(bucket)
-           .prefix(prefix)
-           .set_continuation_token(continuation_token)
-           .send()
-           .await?;
-       Ok(ListObjectsResult {
-           objects: response
-               .contents()
-               .unwrap_or_default()
-               .iter()
-               .cloned()
-               .collect(),
-           continuation_token: response.continuation_token().map(|t| t.to_string()),
-           has_more: response.is_truncated,
-       })
-   }
+       async fn real_list_objects(
+           s3: s3::Client,
+           bucket: &str,
+           prefix: &str,
+           continuation_token: Option<String>,
+       ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
+           let response = s3
+               .list_objects_v2()
+               .bucket(bucket)
+               .prefix(prefix)
+               .set_continuation_token(continuation_token)
+               .send()
+               .await?;
+           Ok(ListObjectsResult {
+               objects: response.contents().unwrap_or_default().to_vec(),
+               continuation_token: response.continuation_token().map(|t| t.to_string()),
+               has_more: response.is_truncated(),
+           })
+       }
    ```
 
 1. The test implementation mimics the Amazon S3 functionâ€™s behavior:
 
    ```
-   #[cfg(test)]
-   fn test_list_objects(
-       pages: &[Vec<s3::model::Object>],
-       continuation_token: Option<String>,
-   ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
-       use std::str::FromStr;
-       let index = continuation_token
-           .map(|t| usize::from_str(&t).expect("valid token"))
-           .unwrap_or_default();
-       if pages.is_empty() {
-           Ok(ListObjectsResult {
-               objects: Vec::new(),
-               continuation_token: None,
-               has_more: false,
-           })
-       } else {
-           Ok(ListObjectsResult {
-               objects: pages[index].clone(),
-               continuation_token: Some(format!("{}", index + 1)),
-               has_more: index + 1 < pages.len(),
-           })
+       #[cfg(test)]
+       fn test_list_objects(
+           pages: &[Vec<s3::model::Object>],
+           continuation_token: Option<String>,
+       ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
+           use std::str::FromStr;
+           let index = continuation_token
+               .map(|t| usize::from_str(&t).expect("valid token"))
+               .unwrap_or_default();
+           if pages.is_empty() {
+               Ok(ListObjectsResult {
+                   objects: Vec::new(),
+                   continuation_token: None,
+                   has_more: false,
+               })
+           } else {
+               Ok(ListObjectsResult {
+                   objects: pages[index].clone(),
+                   continuation_token: Some(format!("{}", index + 1)),
+                   has_more: index + 1 < pages.len(),
+               })
+           }
        }
    }
    ```
@@ -381,7 +370,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
    ```
    async fn determine_prefix_file_size(
-       // Take an instance of our enum rather than the S3 client.
+       // Now we take an instance of our enum rather than the S3 client
        list_objects_impl: ListObjects,
        bucket: &str,
        prefix: &str,
@@ -393,12 +382,12 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
                .list_objects(bucket, prefix, next_token.take())
                .await?;
    
-           // Keep track of the size of the files we got back.
+           // Add up the file sizes we got back
            for object in result.objects {
                total_size_bytes += object.size() as usize;
            }
    
-           // Handle pagination, and break out of the loop if there are no more pages.
+           // Handle pagination, and break the loop if there are no more pages
            next_token = result.continuation_token;
            if !result.has_more {
                break;
@@ -415,7 +404,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
    async fn test_single_page() {
        use s3::model::Object;
    
-       // Create a TestListObjects instance with one page containing two objects.
+       // Create a TestListObjects instance with just one page of two objects in it
        let fake = ListObjects::Test {
            expected_bucket: "some-bucket".into(),
            expected_prefix: "some-prefix".into(),
@@ -425,12 +414,12 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
                .collect()],
        };
    
-       // Run the code we want to test.
+       // Run the code we want to test with it
        let size = determine_prefix_file_size(fake, "some-bucket", "some-prefix")
            .await
            .unwrap();
    
-       // Verify we got the correct total size back.
+       // Verify we got the correct total size back
        assert_eq!(7, size);
    }
    
@@ -438,7 +427,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
    async fn test_multiple_pages() {
        use s3::model::Object;
    
-       // Add a helper function for making pages.
+       // This time, we add a helper function for making pages
        fn make_page(sizes: &[i64]) -> Vec<Object> {
            sizes
                .iter()
@@ -446,14 +435,14 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
                .collect()
        }
    
-       // Create the TestListObjects instance with two pages of objects.
+       // Create the TestListObjects instance with two pages of objects now
        let fake = ListObjects::Test {
            expected_bucket: "some-bucket".into(),
            expected_prefix: "some-prefix".into(),
            pages: vec![make_page(&[5, 2]), make_page(&[3, 9])],
        };
    
-       // Test and verify.
+       // And now test and verify
        let size = determine_prefix_file_size(fake, "some-bucket", "some-prefix")
            .await
            .unwrap();

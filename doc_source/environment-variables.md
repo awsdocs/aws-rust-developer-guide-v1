@@ -22,6 +22,18 @@ To set the environment variable *MyVar* to *MyValue* Microsoft Windows:
 set MyVar=MyValue
 ```
 
+**Warning**  
+Be careful that you don't accidently include a space in an environment variable, especially when creating a default region\. For example, if you set:  
+
+```
+export AWS_REGION=" us-west-2"
+```
+And call an SDK function, you get an error message that there was an invalid character:  
+
+```
+ Unhandled(ConstructionFailure(EndpointResolutionError(InvalidUri(InvalidUriChar))))
+```
+
 The remainder of this topic describes the environment variables by type\.
 
 ## Environment variables for credentials<a name="environment-variables-credentials"></a>
@@ -103,7 +115,7 @@ The SDK recognizes the following environment variables related to your profile\.
 
 AWS\_CONFIG\_FILE  
 Overrides the default location of the `config` file\.  
-Default location: `~/aws/config` on Linux, OS X, or Unix; `%userprofile%\.aws\config` on Microsoft Windows\.
+Default location: `~/.aws/config` on Linux, OS X, or Unix; `%userprofile%\.aws\config` on Microsoft Windows\.
 
 AWS\_PROFILE  
 Overrides the name of the profile to use for all configuration settings\.  
@@ -111,7 +123,7 @@ Default name: **default**\.
 
 AWS\_SHARED\_CREDENTIALS\_FILE  
 Overrides the location of the `credentials` file\.  
-Default location: Default location: `~/aws/credentials` on Linux, OS X, or Unix; `%userprofile%\.aws\credentials` on Microsoft Windows\.
+Default location: Default location: `~/.aws/credentials` on Linux, OS X, or Unix; `%userprofile%\.aws\credentials` on Microsoft Windows\.
 
 ### Home directory resolution<a name="environment-variables-profile-home"></a>
 

@@ -11,6 +11,19 @@ The Rust SDK is currently in alpha development.
 We strongly recommend that you do not use the Rust SDK in production,
 as there will likely be breaking changes between now and the v1 release.
 
+## Important
+
+- Running this code might result in charges to your AWS account.
+- Running the tests might result in charges to your AWS account.
+- We recommend that you grant this code least privilege,
+  or at most the minimum permissions required to perform the task.
+  For more information, see
+  [Grant Least Privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege)
+  in the AWS Identity and Access Management User Guide.
+- This code has not been tested in all AWS Regions.
+  Some AWS services are available only in specific
+  [Regions](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services).
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
@@ -30,12 +43,12 @@ To contribute your own documentation fixes or updates, please use standard GitHu
 
 ## Code examples in the documentation
 
-The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/.rust_alpha).
+The code examples featured in this documentation can be found in a separate repository: [aws-doc-sdk-examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview).
 
 In addition to examples in Rust, you'll also find examples for each of the other AWS SDKs.
 If you find issues with any of the examples, you can submit Issues or fork the repository and submit a pull request!
 
-The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.rst).
+The code examples are provided under the Apache 2.0 open source license. For more details, see the example repository's [README](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/README.md).
 
 ## Copyright and license
 
@@ -43,6 +56,6 @@ All content in this repository, unless otherwise stated, is Copyright Amazon.com
 
 ## License Summary
 
-The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
+The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the [LICENSE](LICENSE) file.
 
-The sample code within this documentation is made available under the MIT-0 license. See the LICENSE-SAMPLECODE file.
+The sample code within this documentation is made available under the MIT-0 license. See the [LICENSE-SAMPLECODE](LICENSE-SAMPLECODE) file.
