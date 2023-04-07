@@ -22,7 +22,7 @@ Add the following dependencies to `Cargo.toml`, where *YOUR\-NAME* is your name,
 
 Keep in mind that the dependency versions might need to be updated since the publication of this tutorial. You can find the latest version of the SDK on [crates\.io](https://crates.io/search?q=aws-sdk)\.
 
-```
+```toml
 [package]
 name = "s3-example"
 version = "0.1.0"
@@ -58,7 +58,7 @@ We’re going to create an app that receives a request containing some text and 
 
 Replace `src/main.rs` with the following code\.
 
-```
+```rust
 use lambda_runtime::{service_fn, Error, LambdaEvent};
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;

@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/apigateway#code-examples)\. 
 Displays the Amazon API Gateway REST APIs in the Region\.  
 
-```
+```rust
 async fn show_apis(client: &Client) -> Result<(), Error> {
     let resp = client.get_rest_apis().send().await?;
 

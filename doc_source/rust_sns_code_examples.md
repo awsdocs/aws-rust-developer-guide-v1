@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
-```
+```rust
 async fn make_topic(client: &Client, topic_name: &str) -> Result<(), Error> {
     let resp = client.create_topic().name(topic_name).send().await?;
 
@@ -51,7 +51,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
-```
+```rust
 async fn show_topics(client: &Client) -> Result<(), Error> {
     let resp = client.list_topics().send().await?;
 
@@ -75,7 +75,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
-```
+```rust
 async fn subscribe_and_publish(
     client: &Client,
     topic_arn: &str,
@@ -116,7 +116,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sns#code-examples)\. 
   
 
-```
+```rust
 async fn subscribe_and_publish(
     client: &Client,
     topic_arn: &str,

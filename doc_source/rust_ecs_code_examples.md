@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
-```
+```rust
 async fn make_cluster(client: &aws_sdk_ecs::Client, name: &str) -> Result<(), aws_sdk_ecs::Error> {
     let cluster = client.create_cluster().cluster_name(name).send().await?;
     println!("cluster created: {:?}", cluster);
@@ -47,7 +47,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
-```
+```rust
 async fn remove_cluster(
     client: &aws_sdk_ecs::Client,
     name: &str,
@@ -69,7 +69,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecs#code-examples)\. 
   
 
-```
+```rust
 async fn show_clusters(client: &aws_sdk_ecs::Client) -> Result<(), aws_sdk_ecs::Error> {
     let resp = client.describe_clusters().send().await?;
 

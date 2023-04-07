@@ -29,7 +29,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn copy_object(
     client: &Client,
     bucket_name: &str,
@@ -63,7 +63,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_bucket(client: &Client, bucket_name: &str, region: &str) -> Result<(), Error> {
     let constraint = BucketLocationConstraint::from(region);
     let cfg = CreateBucketConfiguration::builder()
@@ -90,7 +90,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_bucket(client: &Client, bucket_name: &str) -> Result<(), Error> {
     client.delete_bucket().bucket(bucket_name).send().await?;
     println!("bucket deleted");
@@ -108,7 +108,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 async fn remove_object(client: &Client, bucket: &str, key: &str) -> Result<(), Error> {
     client
         .delete_object()
@@ -133,7 +133,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/S3#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_objects(client: &Client, bucket_name: &str) -> Result<(), Error> {
     let objects = client.list_objects_v2().bucket(bucket_name).send().await?;
 
@@ -171,7 +171,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn download_object(client: &Client, bucket_name: &str, key: &str) -> Result<(), Error> {
     let resp = client
         .get_object()
@@ -199,7 +199,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 async fn show_buckets(strict: bool, client: &Client, region: &str) -> Result<(), Error> {
     let resp = client.list_buckets().send().await?;
     let buckets = resp.buckets().unwrap_or_default();
@@ -248,7 +248,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 async fn show_buckets(strict: bool, client: &Client, region: &str) -> Result<(), Error> {
     let resp = client.list_buckets().send().await?;
     let buckets = resp.buckets().unwrap_or_default();
@@ -297,7 +297,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 async fn show_versions(client: &Client, bucket: &str) -> Result<(), Error> {
     let resp = client.list_object_versions().bucket(bucket).send().await?;
 
@@ -321,7 +321,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_objects(client: &Client, bucket_name: &str) -> Result<(), Error> {
     let objects = client.list_objects_v2().bucket(bucket_name).send().await?;
     println!("Objects in bucket:");
@@ -343,7 +343,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
   
 
-```
+```rust
 pub async fn upload_object(
     client: &Client,
     bucket_name: &str,
@@ -383,7 +383,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/s3#code-examples)\. 
 Code for the binary crate which runs the scenario\.  
 
-```
+```rust
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_s3::{Client, Error, Region};
 use uuid::Uuid;
@@ -437,7 +437,7 @@ async fn run_s3_operations(
 ```
 A library crate with common actions called by the binary\.  
 
-```
+```rust
 use aws_sdk_s3::model::{
     BucketLocationConstraint, CreateBucketConfiguration, Delete, ObjectIdentifier,
 };

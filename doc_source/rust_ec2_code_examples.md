@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
   
 
-```
+```rust
 async fn delete_snapshot(client: &Client, id: &str) -> Result<(), Error> {
     client.delete_snapshot().snapshot_id(id).send().await?;
 
@@ -48,7 +48,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn show_regions(client: &Client) -> Result<(), Error> {
     let rsp = client.describe_regions().send().await?;
 
@@ -71,7 +71,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn show_all_events(client: &Client) -> Result<(), Error> {
     let resp = client.describe_regions().send().await.unwrap();
 
@@ -114,7 +114,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn show_state(client: &Client, ids: Option<Vec<String>>) -> Result<(), Error> {
     let resp = client
         .describe_instances()
@@ -147,7 +147,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
 Shows the state of a snapshot\.  
 
-```
+```rust
 async fn show_state(client: &Client, id: &str) -> Result<(), Error> {
     let resp = client
         .describe_snapshots()
@@ -171,7 +171,7 @@ async fn show_state(client: &Client, id: &str) -> Result<(), Error> {
 ```
   
 
-```
+```rust
 async fn show_snapshots(client: &Client) -> Result<(), Error> {
     // "self" represents your account ID.
     // You can list the snapshots for any account by replacing
@@ -211,7 +211,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn enable_monitoring(client: &Client, id: &str) -> Result<(), Error> {
     client.monitor_instances().instance_ids(id).send().await?;
 
@@ -231,7 +231,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn reboot_instance(client: &Client, id: &str) -> Result<(), Error> {
     client.reboot_instances().instance_ids(id).send().await?;
 
@@ -250,7 +250,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn start_instance(client: &Client, id: &str) -> Result<(), Error> {
     client.start_instances().instance_ids(id).send().await?;
 
@@ -270,7 +270,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
-```
+```rust
 async fn stop_instance(client: &Client, id: &str) -> Result<(), Error> {
     client.stop_instances().instance_ids(id).send().await?;
 

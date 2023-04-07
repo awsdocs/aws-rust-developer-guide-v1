@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/route53#code-examples)\. 
   
 
-```
+```rust
 async fn show_host_info(client: &aws_sdk_route53::Client) -> Result<(), aws_sdk_route53::Error> {
     let hosted_zone_count = client.get_hosted_zone_count().send().await?;
 

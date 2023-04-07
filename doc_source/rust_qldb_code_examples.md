@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
   
 
-```
+```rust
 async fn make_ledger(client: &Client, ledger: &str) -> Result<(), Error> {
     let result = client
         .create_ledger()
@@ -53,7 +53,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/qldb#code-examples)\. 
   
 
-```
+```rust
 async fn show_ledgers(client: &QLDBClient) -> Result<(), Error> {
     let mut pages = client.list_ledgers().into_paginator().page_size(2).send();
 

@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
-```
+```rust
 async fn list_voices(client: &Client) -> Result<(), Error> {
     let resp = client.describe_voices().send().await?;
 
@@ -61,7 +61,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
-```
+```rust
 async fn show_lexicons(client: &Client) -> Result<(), Error> {
     let resp = client.list_lexicons().send().await?;
 
@@ -102,7 +102,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
-```
+```rust
 async fn make_lexicon(client: &Client, name: &str, from: &str, to: &str) -> Result<(), Error> {
     let content = format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     <lexicon version=\"1.0\" xmlns=\"http://www.w3.org/2005/01/pronunciation-lexicon\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
@@ -134,7 +134,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/polly#code-examples)\. 
   
 
-```
+```rust
 async fn synthesize(client: &Client, filename: &str) -> Result<(), Error> {
     let content = fs::read_to_string(&filename);
 

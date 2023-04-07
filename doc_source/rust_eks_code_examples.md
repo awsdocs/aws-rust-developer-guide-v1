@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/eks#code-examples)\. 
   
 
-```
+```rust
 async fn make_cluster(
     client: &aws_sdk_eks::Client,
     name: &str,
@@ -62,7 +62,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/eks#code-examples)\. 
   
 
-```
+```rust
 async fn remove_cluster(
     client: &aws_sdk_eks::Client,
     name: &str,

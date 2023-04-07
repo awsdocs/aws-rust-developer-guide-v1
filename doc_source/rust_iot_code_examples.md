@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
   
 
-```
+```rust
 async fn show_address(client: &Client, endpoint_type: &str) -> Result<(), Error> {
     let resp = client
         .describe_endpoint()
@@ -54,7 +54,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iot#code-examples)\. 
   
 
-```
+```rust
 async fn show_things(client: &Client) -> Result<(), Error> {
     let resp = client.list_things().send().await?;
 

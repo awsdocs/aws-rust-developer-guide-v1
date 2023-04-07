@@ -14,7 +14,7 @@ Since tracing works with the facade exposed by the [log](https://docs.rs/log/0.4
 
 The first step is to add a reference to **env\_logger** in your **Cargo\.toml** file:
 
-```
+```toml
 env_logger = "0.9.0"
 ```
 
@@ -22,7 +22,7 @@ env_logger = "0.9.0"
 
 Here is the full listing of **Cargo\.toml**, where the version numbers are the latest version of [aws\-config](https://crates.io/crates/aws-config) and [aws\-sdk\-dynamodb](https://crates.io/crates/aws-sdk-dynamodb) on **crates\.io**\.
 
-```
+```toml
 [package]
 authors = ["Russell Cohen <rcoh@amazon.com>", "Doug Schwartz <dougsch@amazon.com>"]
 edition = "2018"
@@ -41,13 +41,13 @@ tokio = { version = "1", features = ["full"] }
 
 Then, in your Rust code, initialize the logger in the `main` function before you call any SDK operation:
 
-```
+```rust
     env_logger::init();
 ```
 
 ### Full code listing<a name="logger-code"></a>
 
-```
+```rust
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_dynamodb::{Client, Error, Region, PKG_VERSION};
 use structopt::StructOpt;
@@ -106,13 +106,13 @@ async fn main() -> Result<(), Error> {
 
 When you run this code, you won't see any logging information\. To enable the display of logging information, use the following command, which sets the log level to **debug**:
 
-```
+```bash
 RUST_LOG=aws_config=debug cargo run
 ```
 
 You can redirect the logs to the file **log\.txt** by using the following command line:
 
-```
+```bash
 RUST_LOG=aws_config=debug cargo run 2> log.txt
 ```
 
@@ -122,19 +122,19 @@ Using **env\_logger** is fine for basic logging, however, the SDK also tracks sp
 
 Add the tracing library to your **Cargo\.toml** file:
 
-```
+```toml
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 ```
 
 Then, in your Rust code, initialize the logger in the `main` function before you call any SDK operation:
 
-```
+```rust
     tracing_subscriber::fmt::init();
 ```
 
 ### Full code listing<a name="tracing-code"></a>
 
-```
+```rust
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_dynamodb::{Client, Error, Region, PKG_VERSION};
 use structopt::StructOpt;

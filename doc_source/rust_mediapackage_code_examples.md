@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/mediapackage#code-examples)\. 
 List channel ARNs and descriptions\.  
 
-```
+```rust
 async fn show_channels(client: &Client) -> Result<(), Error> {
     let list_channels = client.list_channels().send().await?;
 
@@ -57,7 +57,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/mediapackage#code-examples)\. 
 List your endpoint descriptions and URLs\.  
 
-```
+```rust
 async fn show_endpoints(client: &Client) -> Result<(), Error> {
     let or_endpoints = client.list_origin_endpoints().send().await?;
 

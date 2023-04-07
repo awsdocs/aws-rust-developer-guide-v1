@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/medialive#code-examples)\. 
 List your MediaLive input names and ARNs in the Region\.  
 
-```
+```rust
 async fn show_inputs(client: &Client) -> Result<(), Error> {
     let input_list = client.list_inputs().send().await?;
 

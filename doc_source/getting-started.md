@@ -62,7 +62,7 @@ On Linux and MacOS, this file is found at **\~/\.aws/credentials**\. On Microsof
 
 1. Add the following to the file, where *YOUR\-ACCESS\-KEY* is the value of your access key and *YOUR\-SECRET\-KEY* is the value of your secret key:
 
-   ```
+   ```toml
    [default]
    aws_access_key_id=YOUR-ACCESS-KEY
    aws_secret_access_key=YOUR-SECRET-KEY
@@ -90,7 +90,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
 
 1. Navigate into the **hello\_world** directory and edit **Cargo\.toml** to include these crates in **\[dependencies\]**, where *VERSION* is the version number you found on **crates\.io**:
 
-   ```
+   ```toml
    [dependencies]
    aws-config = "VERSION"
    aws-sdk-dynamodb = "VERSION"
@@ -99,7 +99,7 @@ Let's create a simple Rust app that lists your DynamoDB tables\.
 
 1. Update **main\.rs** in the **src** directory to include the following code\.
 
-   ```
+   ```rust
    use aws_config::meta::region::RegionProviderChain;
    use aws_sdk_dynamodb::{Client, Error};
    

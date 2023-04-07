@@ -13,7 +13,7 @@ A particular TLS version can be enforced in the application by providing manual 
 **Note**  
 Some AWS services do not yet support TLS 1\.3, so enforcing this version might affect SDK interoperability\. We recommend testing this configuration with each service prior to production deployment\.
 
-```
+```rust
 pub async fn connect_via_tls_13() -> Result<(), Error> {
     println!("Attempting to connect to KMS using TLS 1.3: ");
 

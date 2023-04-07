@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn create_table(client: &Client, table: &str, key: &str) -> Result<(), Error> {
     let a_name: String = key.into();
     let table_name: String = table.into();
@@ -79,7 +79,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn delete_table(client: &Client, table: &str) -> Result<(), Error> {
     client.delete_table().table_name(table).send().await?;
 
@@ -99,7 +99,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn delete_item(client: &Client, table: &str, key: &str, value: &str) -> Result<(), Error> {
     match client
         .delete_item()
@@ -130,7 +130,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn list_tables(client: &Client) -> Result<(), Error> {
     let paginator = client.list_tables().into_paginator().items().send();
     let table_names = paginator.collect::<Result<Vec<_>, _>>().await?;
@@ -147,7 +147,7 @@ async fn list_tables(client: &Client) -> Result<(), Error> {
 ```
 Determine whether table exists\.  
 
-```
+```rust
 async fn does_table_exist(client: &Client, table: &str) -> Result<bool, Error> {
     let table_exists = client
         .list_tables()
@@ -173,7 +173,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn add_item(
     client: &Client,
     table: &str,
@@ -221,7 +221,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
 Find the movies made in the specified year\.  
 
-```
+```rust
 fn movies_in_year(client: &Client, table_name: &str, year: u16) -> Query {
     client
         .query()
@@ -242,7 +242,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/dynamodb#code-examples)\. 
   
 
-```
+```rust
 async fn list_items(client: &Client, table: &str) -> Result<(), Error> {
     let items: Result<Vec<_>, _> = client
         .scan()

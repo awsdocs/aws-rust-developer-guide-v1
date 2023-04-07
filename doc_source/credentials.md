@@ -14,7 +14,7 @@ Once you have your credentials, the SDK can access them from any of the followin
 +  [ECS credentials \(IAM roles for tasks\)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
 + As entries in the **credentials** file in the **\.aws** directory in your home directory \(**\~/\.aws/credentials** on Linux, OS X, and Unix; **%userprofile%\\\.aws\\credentials** on Microsoft Windows\):
 
-  ```
+  ```toml
   [default]
   aws_access_key_id=YOUR-ACCESS-KEY
   aws_secret_access_key=YOUR-SECRET-KEY
@@ -27,13 +27,13 @@ Since most resources live in a specific AWS Region, it's imperative that you sup
 + In the environment variable **AWS\_REGION**\.
 + As an entry in the **credentials** file in the **\.aws** directory in your home directory \(**\~/\.aws/credentials** on Linux, OS X, and Unix; **%userprofile%\\\.aws\\credentials** on Microsoft Windows\):
 
-  ```
+  ```toml
   [default]
   region=YOUR-DEFAULT-REGION
   ```
 + As an entry in the **config** file in the **\.aws** directory in your home directory \(**\~/\.aws/config** on Linux, OS X, and Unix; **%userprofile%\\\.aws\\config** on Microsoft Windows\):
 
-  ```
+  ```toml
   [default]
   region=YOUR-DEFAULT-REGION
   ```

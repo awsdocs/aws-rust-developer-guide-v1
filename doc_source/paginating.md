@@ -12,7 +12,7 @@ If you went through the [Create your first SDK app](getting-started.md#hello-wor
 
 Let's modify that app to only list the first 10 tables, then show you how to detect whether there are more than 10 tables\. And finally, if there are more tables, how to list the remaining tables\. To list only the first 10 tables change the call to `list_tables` to the following\.
 
-```
+```rust
     let resp = client.list_tables().limit(10).send().await?;
 ```
 
@@ -20,7 +20,7 @@ Now when you run the program it only shows up to the first 10 tables\.
 
 Let's add a bit of code to detect when we have more than 10 tables\. Add the following code after the print statement that displays how many table names it found\.
 
-```
+```rust
     if resp.last_evaluated_table_name != None {
         println!("There are more tables");
     }
@@ -30,7 +30,7 @@ Run the program again\. If you see the *There are more tables\!* in the output, 
 
 Replace everything after creating the client with the following code\. Note that it prints the message `–- more –-` after every 10 tables:
 
-```
+```rust
     let mut resp = client.list_tables().limit(10).send().await?;
     let names = resp.table_names.unwrap_or_default();
     let len = names.len();

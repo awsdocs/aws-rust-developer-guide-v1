@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn make_key(client: &Client) -> Result<(), Error> {
     let resp = client.create_key().send().await?;
 
@@ -54,7 +54,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn make_string(client: &Client, length: i32) -> Result<(), Error> {
     let resp = client
         .generate_random()
@@ -86,7 +86,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn decrypt_key(client: &Client, key: &str, filename: &str) -> Result<(), Error> {
     // Open input text file and get contents as a string
     // input is a base-64 encoded string, so decode it:
@@ -126,7 +126,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn encrypt_string(
     verbose: bool,
     client: &Client,
@@ -166,7 +166,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn make_key(client: &Client, key: &str) -> Result<(), Error> {
     let resp = client
         .generate_data_key()
@@ -199,7 +199,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn make_key(client: &Client, key: &str) -> Result<(), Error> {
     let resp = client
         .generate_data_key_without_plaintext()
@@ -232,7 +232,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn show_keys(client: &Client) -> Result<(), Error> {
     let resp = client.list_keys().send().await?;
 
@@ -261,7 +261,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kms#code-examples)\. 
   
 
-```
+```rust
 async fn reencrypt_string(
     verbose: bool,
     client: &Client,

@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/applicationautoscaling#code-examples)\. 
   
 
-```
+```rust
 async fn show_policies(client: &Client) -> Result<(), Error> {
     let response = client
         .describe_scaling_policies()

@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/cognitoidentityprovider#code-examples)\. 
   
 
-```
+```rust
 async fn show_pools(client: &Client) -> Result<(), Error> {
     let response = client.list_user_pools().max_results(10).send().await?;
     if let Some(pools) = response.user_pools() {

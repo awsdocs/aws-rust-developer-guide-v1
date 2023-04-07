@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
-```
+```rust
 async fn create_group(client: &Client, name: &str, id: &str) -> Result<(), Error> {
     client
         .create_auto_scaling_group()
@@ -55,7 +55,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
-```
+```rust
 async fn delete_group(client: &Client, name: &str, force: bool) -> Result<(), Error> {
     client
         .delete_auto_scaling_group()
@@ -80,7 +80,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
-```
+```rust
 async fn list_groups(client: &Client) -> Result<(), Error> {
     let resp = client.describe_auto_scaling_groups().send().await?;
 
@@ -115,7 +115,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/autoscaling#code-examples)\. 
   
 
-```
+```rust
 async fn update_group(client: &Client, name: &str, size: i32) -> Result<(), Error> {
     client
         .update_auto_scaling_group()

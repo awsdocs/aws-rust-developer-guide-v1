@@ -16,13 +16,13 @@ To set the maximum number of retries, set the `AWS_MAX_ATTEMPTS` environment var
 
 On Linux, OS X, or Unix, where *ATTEMPTS* is a value greater than zero\.
 
-```
+```bash
 export AWS_MAX_ATTEMPTS=ATTEMPTS
 ```
 
 On Microsoft Windows, where *ATTEMPTS* is a value greater than zero\.
 
-```
+```bash
 set AWS_MAX_ATTEMPTS=ATTEMPTS
 ```
 
@@ -30,7 +30,7 @@ set AWS_MAX_ATTEMPTS=ATTEMPTS
 
 Set the **max\_attempts** value \(`~/.aws/config` file on Linux, OS X or Unix; `%userprofile%\.aws\config` file on Microsoft Windows\) as follows, where *ATTEMPTS* is a value greater than zero\.
 
-```
+```toml
 [default]
 max_attempts=ATTEMPTS
 ```
@@ -39,7 +39,7 @@ max_attempts=ATTEMPTS
 
  You can disable retries when creating the configuration for a client, as shown in the following code example\.
 
-```
+```rust
     let shared_config = aws_config::from_env()
         .region(region_provider)
         // Disable retries
@@ -51,7 +51,7 @@ max_attempts=ATTEMPTS
 
 To override the retry configuration for a service client, specify the retry configuration when you create the service client, as shown in the following code example, where *tries* is a value greater than zero\.
 
-```
+```rust
     let shared_config = aws_config::from_env().region(region_provider).load().await;
 
     // Construct an S3 client with customized retry configuration.

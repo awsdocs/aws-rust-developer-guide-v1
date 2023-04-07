@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
   
 
-```
+```rust
 async fn show_instances(client: &Client) -> Result<(), Error> {
     let notebooks = client.list_notebook_instances().send().await?;
 
@@ -59,7 +59,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sagemaker#code-examples)\. 
   
 
-```
+```rust
 async fn show_jobs(client: &Client) -> Result<(), Error> {
     let job_details = client.list_training_jobs().send().await?;
 

@@ -29,7 +29,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn attach_role_policy(
     client: &iamClient,
     role: &Role,
@@ -54,7 +54,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn attach_user_policy(
     client: &iamClient,
     user_name: &str,
@@ -81,7 +81,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_policy(
     client: &iamClient,
     policy_name: &str,
@@ -107,7 +107,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_role(
     client: &iamClient,
     role_name: &str,
@@ -139,7 +139,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_service_linked_role(
     client: &iamClient,
     aws_service_name: String,
@@ -168,7 +168,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_user(client: &iamClient, user_name: &str) -> Result<User, iamError> {
     let response = client.create_user().user_name(user_name).send().await?;
 
@@ -186,7 +186,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn create_access_key(client: &iamClient, user_name: &str) -> Result<AccessKey, iamError> {
     let mut tries: i32 = 0;
     let max_tries: i32 = 10;
@@ -220,7 +220,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_policy(client: &iamClient, policy: Policy) -> Result<(), iamError> {
     client
         .delete_policy()
@@ -241,7 +241,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_role(client: &iamClient, role: &Role) -> Result<(), iamError> {
     let role = role.clone();
     loop {
@@ -273,7 +273,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_service_linked_role(
     client: &iamClient,
     role_name: &str,
@@ -298,7 +298,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_user(client: &iamClient, user: &User) -> Result<(), SdkError<DeleteUserError>> {
     let user = user.clone();
     let mut tries: i32 = 0;
@@ -338,7 +338,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_access_key(
     client: &iamClient,
     user: &User,
@@ -375,7 +375,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn delete_user_policy(
     client: &iamClient,
     user: &User,
@@ -402,7 +402,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn detach_role_policy(
     client: &iamClient,
     role_name: &str,
@@ -429,7 +429,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn detach_user_policy(
     client: &iamClient,
     user_name: &str,
@@ -456,7 +456,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn get_role(
     client: &iamClient,
     role_name: String,
@@ -476,7 +476,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn get_account_password_policy(
     client: &iamClient,
 ) -> Result<GetAccountPasswordPolicyOutput, SdkError<GetAccountPasswordPolicyError>> {
@@ -496,7 +496,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_saml_providers(
     client: &Client,
 ) -> Result<ListSamlProvidersOutput, SdkError<ListSAMLProvidersError>> {
@@ -516,7 +516,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_groups(
     client: &iamClient,
     path_prefix: Option<String>,
@@ -545,7 +545,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_role_policies(
     client: &iamClient,
     role_name: &str,
@@ -574,7 +574,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_policies(
     client: &iamClient,
     path_prefix: Option<String>,
@@ -603,7 +603,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_attached_role_policies(
     client: &iamClient,
     role_name: String,
@@ -634,7 +634,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_roles(
     client: &iamClient,
     path_prefix: Option<String>,
@@ -662,7 +662,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 pub async fn list_users(
     client: &iamClient,
     path_prefix: Option<String>,
@@ -697,7 +697,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
-```
+```rust
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_iam::Error as iamError;
 use aws_sdk_iam::{Client as iamClient, Credentials as iamCredentials};

@@ -12,12 +12,12 @@ This section describes a couple of approaches to unit testing code written with 
 
 Letâ€™s look at a concrete example to illustrate\. The following example calls Amazon S3 over and over again with pagination in order to get the complete file size of a prefix in the bucket:
 
-```
+```rust
 // So we can refer to the S3 package as s3 for the rest of the example.
 use aws_sdk_s3 as s3;
 ```
 
-```
+```rust
 // Lists all objects in an S3 bucket with the given prefix, and adds up their size.
 async fn determine_prefix_file_size(
     s3: s3::Client,
@@ -64,14 +64,14 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
 1. Add the following entry to the `Cargo.toml` file\.
 
-   ```
+   ```toml
    [dependencies]
    async-trait = "0.1.51"
    ```
 
 1. Next, lets define our trait\. Since we want to test the pagination and summation logic in our function, it makes sense to abstract out the call to `ListObjectsV2` from Amazon S3, so weâ€™ll make a trait for that\.
 
-   ```
+   ```rust
    pub struct ListObjectsResult {
        pub objects: Vec<s3::model::Object>,
        pub continuation_token: Option<String>,
@@ -91,7 +91,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
 1. Now we can refactor the function to use this trait instead of the actual Amazon S3 client:
 
-   ```
+   ```rust
    async fn determine_prefix_file_size(
        // Now we take a reference to our trait object instead of the S3 client
        list_objects_impl: &dyn ListObjects,
@@ -122,7 +122,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
 1. Now that our implementation is successfully abstracted, it can be unit tested\. Add the actual Amazon S3 implementation:
 
-   ```
+   ```rust
    #[derive(Clone, Debug)]
    pub struct S3ListObjects {
        s3: s3::Client,
@@ -161,7 +161,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
 1. Create a fake implementation for use in unit tests:
 
-   ```
+   ```rust
    #[derive(Clone, Debug)]
    pub struct TestListObjects {
        expected_bucket: String,
@@ -202,7 +202,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
 1. We can now give the test a list of pages of data to respond with in a unit test, which mimics the behavior of `ListObjectsV2`\. Here are our unit tests:
 
-   ```
+   ```rust
    #[tokio::test]
    async fn test_single_page() {
        use s3::model::Object;
@@ -263,7 +263,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. Add the following code to exclude the `Test` variant from the production build:
 
-   ```
+   ```rust
    pub enum ListObjects {
        Real(s3::Client),
        #[cfg(test)]
@@ -277,7 +277,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. With the enum in place, we can start implementing a list objects call\. Create a struct for the return value:
 
-   ```
+   ```rust
    pub struct ListObjectsResult {
        pub objects: Vec<s3::model::Object>,
        pub continuation_token: Option<String>,
@@ -287,7 +287,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. Add the following list objects call that matches self to determine which implementation to use:
 
-   ```
+   ```rust
    impl ListObjects {
        pub async fn list_objects(
            &self,
@@ -315,7 +315,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. Next, implement `Real` and `Test`, which are called from the previous match\. Letâ€™s start with the real implementation that wraps the Amazon S3 client and translates its output:
 
-   ```
+   ```rust
        async fn real_list_objects(
            s3: s3::Client,
            bucket: &str,
@@ -339,7 +339,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. The test implementation mimics the Amazon S3 functionâ€™s behavior:
 
-   ```
+   ```rust
        #[cfg(test)]
        fn test_list_objects(
            pages: &[Vec<s3::model::Object>],
@@ -368,7 +368,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. Update the original implementation to use the enum instead of the Amazon S3 client:
 
-   ```
+   ```rust
    async fn determine_prefix_file_size(
        // Now we take an instance of our enum rather than the S3 client
        list_objects_impl: ListObjects,
@@ -399,7 +399,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
 1. Create the unit tests by instantiating the `ListObjects::Test` variant with some test data, and then test our `determine_prefix_file_size` function with the test data:
 
-   ```
+   ```rust
    #[tokio::test]
    async fn test_single_page() {
        use s3::model::Object;

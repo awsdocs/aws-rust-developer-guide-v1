@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
-```
+```rust
 async fn make_stream(client: &Client, stream: &str) -> Result<(), Error> {
     client
         .create_stream()
@@ -53,7 +53,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
-```
+```rust
 async fn remove_stream(client: &Client, stream: &str) -> Result<(), Error> {
     client.delete_stream().stream_name(stream).send().await?;
 
@@ -73,7 +73,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
-```
+```rust
 async fn show_stream(client: &Client, stream: &str) -> Result<(), Error> {
     let resp = client.describe_stream().stream_name(stream).send().await?;
 
@@ -103,7 +103,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
-```
+```rust
 async fn show_streams(client: &Client) -> Result<(), Error> {
     let resp = client.list_streams().send().await?;
 
@@ -130,7 +130,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/kinesis#code-examples)\. 
   
 
-```
+```rust
 async fn add_record(client: &Client, stream: &str, key: &str, data: &str) -> Result<(), Error> {
     let blob = Blob::new(data);
 

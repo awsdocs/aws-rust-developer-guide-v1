@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
   
 
-```
+```rust
 async fn show_images(
     client: &aws_sdk_ecr::Client,
     repository: &str,
@@ -65,7 +65,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ecr#code-examples)\. 
   
 
-```
+```rust
 async fn show_repos(client: &aws_sdk_ecr::Client) -> Result<(), aws_sdk_ecr::Error> {
     let rsp = client.describe_repositories().send().await?;
 

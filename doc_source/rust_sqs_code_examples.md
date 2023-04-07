@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
-```
+```rust
 async fn send_receive(client: &Client) -> Result<(), Error> {
     let queues = client.list_queues().send().await?;
     let queue_urls = queues.queue_urls().unwrap_or_default();
@@ -75,7 +75,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
-```
+```rust
 async fn send_receive(client: &Client) -> Result<(), Error> {
     let queues = client.list_queues().send().await?;
     let queue_urls = queues.queue_urls().unwrap_or_default();
@@ -122,7 +122,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
-```
+```rust
 async fn send_receive(client: &Client) -> Result<(), Error> {
     let queues = client.list_queues().send().await?;
     let queue_urls = queues.queue_urls().unwrap_or_default();

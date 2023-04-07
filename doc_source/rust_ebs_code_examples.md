@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
   
 
-```
+```rust
 async fn start(client: &Client, description: &str) -> Result<String, Error> {
     let snapshot = client
         .start_snapshot()
@@ -52,7 +52,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
   
 
-```
+```rust
 async fn finish(client: &Client, id: &str) -> Result<(), Error> {
     client
         .complete_snapshot()
@@ -79,7 +79,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
   
 
-```
+```rust
 async fn add_block(
     client: &Client,
     id: &str,

@@ -12,7 +12,7 @@ In most cases you'll want to create a client that uses the default search path, 
 
 You can also supply a region an argument to the client object\. Most of the [SDK for Rust code examples](rust_code_examples.md) use the following construct, which searches for the region in the search path as described previously, and if not found, sets the region to `us-east-1`, and *SERVICENAME* is the name of the service, such as `s3` for Amazon Simple Storage Service:
 
-```
+```rust
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_SERVICENAME::Client;
     

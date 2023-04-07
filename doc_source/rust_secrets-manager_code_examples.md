@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
-```
+```rust
 async fn make_secret(client: &Client, name: &str, value: &str) -> Result<(), Error> {
     client
         .create_secret()
@@ -53,7 +53,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
-```
+```rust
 async fn show_secret(client: &Client, name: &str) -> Result<(), Error> {
     let resp = client.get_secret_value().secret_id(name).send().await?;
 
@@ -73,7 +73,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/secretsmanager#code-examples)\. 
   
 
-```
+```rust
 async fn show_secrets(client: &Client) -> Result<(), Error> {
     let resp = client.list_secrets().send().await?;
 

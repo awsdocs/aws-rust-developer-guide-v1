@@ -28,7 +28,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
   
 
-```
+```rust
 async fn add_contact(client: &Client, list: &str, email: &str) -> Result<(), Error> {
     client
         .create_contact()
@@ -53,7 +53,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
   
 
-```
+```rust
 async fn make_list(client: &Client, contact_list: &str) -> Result<(), Error> {
     client
         .create_contact_list()
@@ -77,7 +77,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
 Determines whether an email address has been verified\.  
 
-```
+```rust
 async fn is_verified(client: &Client, email: &str) -> Result<(), Error> {
     let resp = client
         .get_email_identity()
@@ -105,7 +105,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
   
 
-```
+```rust
 async fn show_lists(client: &Client) -> Result<(), Error> {
     let resp = client.list_contact_lists().send().await?;
 
@@ -129,7 +129,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
   
 
-```
+```rust
 async fn show_contacts(client: &Client, list: &str) -> Result<(), Error> {
     let resp = client
         .list_contacts()
@@ -157,7 +157,7 @@ This documentation is for an SDK in preview release\. The SDK is subject to chan
  To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ses#code-examples)\. 
 Sends a message to all members of the contact list\.  
 
-```
+```rust
 async fn send_message(
     client: &Client,
     list: &str,

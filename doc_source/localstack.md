@@ -14,7 +14,7 @@ LocalStack is a cloud service emulator that runs in a single container on your c
 
 Specify the SDK crates in `Cargo.toml`\. Note that this specifies to use the developer preview version of the crates\. Check [crates\.io](https://crates.io/) for the latest version\.
 
-```
+```toml
 [package]
 name = "localstack-example"
 version = "0.1.0"
@@ -34,7 +34,7 @@ tracing-subscriber = { version = "0.3.5", features = ["env-filter"] }
 
 ## src/main\.rs<a name="localstack-main"></a>
 
-```
+```rust
 use aws_smithy_http::endpoint::Endpoint;
 use http::Uri;
 use std::error::Error;
