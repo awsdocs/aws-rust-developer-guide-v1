@@ -18,36 +18,23 @@ aws_secret_access_key = localstacksecret
 The following code example demonstrates how to use DynamoDB Local to retrieve a list of your local tables\.
 
 ```
-use aws_sdk_dynamodb::{Client, Endpoint, Error};
-use http::Uri;
+use aws_sdk_dynamodb::{Client, Error};
+use clap::Parser;
+use dynamodb_code_examples::{make_config, scenario::list::list_tables, Opt};
 
-/// Lists your tables in DynamDB local.
+/// Lists your tables in DynamoDB local.
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    // Select a profile by setting the `AWS_PROFILE` environment variable.
-    let config = aws_config::load_from_env().await;
+    let config = make_config(Opt::parse()).await?;
     let dynamodb_local_config = aws_sdk_dynamodb::config::Builder::from(&config)
-        .endpoint_resolver(
+        .endpoint_url(
             // 8000 is the default dynamodb port
-            Endpoint::immutable(Uri::from_static("http://localhost:8000")),
+            "http://localhost:8000",
         )
         .build();
 
     let client = Client::from_conf(dynamodb_local_config);
-
-    let resp = client.list_tables().send().await?;
-
-    println!("Tables:");
-
-    let names = resp.table_names().unwrap_or_default();
-
-    for name in names {
-        println!("  {}", name);
-    }
-
-    println!();
-    println!("Found {} tables", names.len());
-
+    list_tables(&client).await?;
     Ok(())
 }
 ```

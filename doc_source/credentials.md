@@ -19,6 +19,7 @@ Once you have your credentials, the SDK can access them from any of the followin
   aws_access_key_id=YOUR-ACCESS-KEY
   aws_secret_access_key=YOUR-SECRET-KEY
   ```
++ Using a named profile specified in the **credentials** file via the **AWS\_PROFILE** environment variable\.
 + From the [EC2 Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) \(IAM Roles attached to an instance\)
 
 ## Specifying a region<a name="credentials-region"></a>

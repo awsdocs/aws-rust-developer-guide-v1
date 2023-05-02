@@ -8,16 +8,16 @@
 
 The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with Amazon EC2\.
 
-*Actions* are code excerpts that show you how to call individual Amazon EC2 functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon EC2 functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w14aac14b9c27c13)
++ [Actions](#actions)
 
-## Actions<a name="w14aac14b9c27c13"></a>
+## Actions<a name="actions"></a>
 
 ### Delete a snapshot<a name="ec2_DeleteSnapshot_rust_topic"></a>
 
@@ -25,7 +25,7 @@ The following code example shows how to delete an Amazon EBS snapshot\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
   
 
 ```
@@ -45,7 +45,7 @@ The following code example shows how to describe Amazon EC2 Regions\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -68,7 +68,7 @@ The following code example shows how to describe the status of Amazon EC2 instan
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -89,7 +89,7 @@ async fn show_all_events(client: &Client) -> Result<(), Error> {
         for status in resp.unwrap().instance_statuses().unwrap_or_default() {
             println!(
                 "  Events scheduled for instance ID: {}",
-                status.instance_id().as_deref().unwrap_or_default()
+                status.instance_id().unwrap_or_default()
             );
             for event in status.events().unwrap_or_default() {
                 println!("    Event ID:     {}", event.instance_event_id().unwrap());
@@ -111,7 +111,7 @@ The following code example shows how to describe Amazon EC2 instances\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -144,7 +144,7 @@ The following code example shows how to describe Amazon EBS snapshots\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ebs#code-examples)\. 
 Shows the state of a snapshot\.  
 
 ```
@@ -183,11 +183,11 @@ async fn show_snapshots(client: &Client) -> Result<(), Error> {
     for snapshot in snapshots {
         println!(
             "ID:          {}",
-            snapshot.snapshot_id().as_deref().unwrap_or_default()
+            snapshot.snapshot_id().unwrap_or_default()
         );
         println!(
             "Description: {}",
-            snapshot.description().as_deref().unwrap_or_default()
+            snapshot.description().unwrap_or_default()
         );
         println!("State:       {}", snapshot.state().unwrap().as_ref());
         println!();
@@ -208,7 +208,7 @@ The following code example shows how to enable monitoring for a running Amazon E
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -228,7 +228,7 @@ The following code example shows how to reboot an Amazon EC2 instance\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -247,7 +247,7 @@ The following code example shows how to start an Amazon EC2 instance\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```
@@ -267,7 +267,7 @@ The following code example shows how to stop an Amazon EC2 instance\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/ec2#code-examples)\. 
   
 
 ```

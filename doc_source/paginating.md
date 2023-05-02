@@ -21,7 +21,7 @@ Now when you run the program it only shows up to the first 10 tables\.
 Let's add a bit of code to detect when we have more than 10 tables\. Add the following code after the print statement that displays how many table names it found\.
 
 ```
-    if resp.last_evaluated_table_name != None {
+    if resp.last_evaluated_table_name.is_some() {
         println!("There are more tables");
     }
 ```
@@ -32,18 +32,18 @@ Replace everything after creating the client with the following code\. Note that
 
 ```
     let mut resp = client.list_tables().limit(10).send().await?;
-    let names = resp.table_names.unwrap_or_default();
+    let mut names = resp.table_names.unwrap_or_default();
     let len = names.len();
 
     let mut num_tables = len;
 
     println!("Tables:");
 
-    for name in names {
+    for name in &names {
         println!("  {}", name);
     }
 
-    while resp.last_evaluated_table_name != None {
+    while resp.last_evaluated_table_name.is_some() {
         println!("-- more --");
         resp = client
             .list_tables()
@@ -56,16 +56,17 @@ Replace everything after creating the client with the following code\. Note that
             .send()
             .await?;
 
-        let names = resp.table_names.unwrap_or_default();
-        num_tables += names.len();
+        let mut more_names = resp.table_names.unwrap_or_default();
+        num_tables += more_names.len();
 
-        for name in names {
+        for name in &more_names {
             println!("  {}", name);
         }
+        names.append(&mut more_names);
     }
 
     println!();
     println!("Found {} tables", num_tables);
 
-    Ok(())
+    Ok(names)
 ```

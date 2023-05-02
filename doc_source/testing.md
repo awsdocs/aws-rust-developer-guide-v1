@@ -73,7 +73,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
 
    ```
    pub struct ListObjectsResult {
-       pub objects: Vec<s3::model::Object>,
+       pub objects: Vec<s3::types::Object>,
        pub continuation_token: Option<String>,
        pub has_more: bool,
    }
@@ -166,7 +166,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
    pub struct TestListObjects {
        expected_bucket: String,
        expected_prefix: String,
-       pages: Vec<Vec<s3::model::Object>>,
+       pages: Vec<Vec<s3::types::Object>>,
    }
    
    #[async_trait]
@@ -205,7 +205,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
    ```
    #[tokio::test]
    async fn test_single_page() {
-       use s3::model::Object;
+       use s3::types::Object;
    
        // Create a TestListObjects instance with just one page of two objects in it
        let fake = TestListObjects {
@@ -228,7 +228,7 @@ For this approach, we take advantage of Rustâ€™s trait objects feature\. If youâ
    
    #[tokio::test]
    async fn test_multiple_pages() {
-       use s3::model::Object;
+       use s3::types::Object;
    
        // This time, we add a helper function for making pages
        fn make_page(sizes: &[i64]) -> Vec<Object> {
@@ -270,7 +270,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
        Test {
            expected_bucket: String,
            expected_prefix: String,
-           pages: Vec<Vec<s3::model::Object>>,
+           pages: Vec<Vec<s3::types::Object>>,
        },
    }
    ```
@@ -279,7 +279,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
 
    ```
    pub struct ListObjectsResult {
-       pub objects: Vec<s3::model::Object>,
+       pub objects: Vec<s3::types::Object>,
        pub continuation_token: Option<String>,
        pub has_more: bool,
    }
@@ -342,7 +342,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
    ```
        #[cfg(test)]
        fn test_list_objects(
-           pages: &[Vec<s3::model::Object>],
+           pages: &[Vec<s3::types::Object>],
            continuation_token: Option<String>,
        ) -> Result<ListObjectsResult, Box<dyn Error + Send + Sync + 'static>> {
            use std::str::FromStr;
@@ -402,7 +402,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
    ```
    #[tokio::test]
    async fn test_single_page() {
-       use s3::model::Object;
+       use s3::types::Object;
    
        // Create a TestListObjects instance with just one page of two objects in it
        let fake = ListObjects::Test {
@@ -425,7 +425,7 @@ For the enum approach, we create an enum to represent the `ListObjectsV2` call w
    
    #[tokio::test]
    async fn test_multiple_pages() {
-       use s3::model::Object;
+       use s3::types::Object;
    
        // This time, we add a helper function for making pages
        fn make_page(sizes: &[i64]) -> Vec<Object> {

@@ -11,4 +11,3 @@ This section describes how to create a custom endpoint\. In most cases you use t
 **Topics**
 + [DynamoDB Local](dynamodb-local.md)
 + [Localstack](localstack.md)
-+ [S3 Object Lambda endpoint](s3-object-lambda.md)

@@ -8,16 +8,16 @@
 
 The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with Amazon RDS Data Service\.
 
-*Actions* are code excerpts that show you how to call individual Amazon RDS Data Service functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon RDS Data Service functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w14aac14b9c53c13)
++ [Actions](#actions)
 
-## Actions<a name="w14aac14b9c53c13"></a>
+## Actions<a name="actions"></a>
 
 ### Run an SQL statement<a name="rds-data_ExecuteStatement_rust_topic"></a>
 
@@ -25,7 +25,7 @@ The following code example shows how to run an SQL statement\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/rdsdata#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/rdsdata#code-examples)\. 
   
 
 ```

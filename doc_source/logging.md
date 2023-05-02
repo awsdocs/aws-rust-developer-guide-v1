@@ -24,19 +24,22 @@ Here is the full listing of **Cargo\.toml**, where the version numbers are the l
 
 ```
 [package]
-authors = ["Russell Cohen <rcoh@amazon.com>", "Doug Schwartz <dougsch@amazon.com>"]
-edition = "2018"
+authors = [
+  "Russell Cohen <rcoh@amazon.com>",
+  "Doug Schwartz <dougsch@amazon.com>",
+]
+edition = "2021"
 name = "logging-example"
 version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-aws-config = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
-aws-sdk-dynamodb = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "next" }
+aws-config = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "main" }
+aws-sdk-dynamodb = { git = "https://github.com/awslabs/aws-sdk-rust", branch = "main" }
 env_logger = "0.9.0"
-structopt = { version = "0.3", default-features = false }
-tokio = { version = "1", features = ["full"] }
+clap = { version = "4.2.1", features = ["derive"] }
+tokio = { version = "1.20.1", features = ["full"] }
 ```
 
 Then, in your Rust code, initialize the logger in the `main` function before you call any SDK operation:
@@ -49,10 +52,10 @@ Then, in your Rust code, initialize the logger in the `main` function before you
 
 ```
 use aws_config::meta::region::RegionProviderChain;
-use aws_sdk_dynamodb::{Client, Error, Region, PKG_VERSION};
-use structopt::StructOpt;
+use aws_sdk_dynamodb::{config::Region, meta::PKG_VERSION, Client, Error};
+use clap::Parser;
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 struct Opt {
     /// The AWS Region.
     #[structopt(short, long)]
@@ -67,7 +70,7 @@ struct Opt {
 async fn main() -> Result<(), Error> {
     env_logger::init();
 
-    let Opt { region, verbose } = Opt::from_args();
+    let Opt { region, verbose } = Opt::parse();
 
     let region_provider = RegionProviderChain::first_try(region.map(Region::new))
         .or_default_provider()
@@ -136,10 +139,10 @@ Then, in your Rust code, initialize the logger in the `main` function before you
 
 ```
 use aws_config::meta::region::RegionProviderChain;
-use aws_sdk_dynamodb::{Client, Error, Region, PKG_VERSION};
-use structopt::StructOpt;
+use aws_sdk_dynamodb::{config::Region, meta::PKG_VERSION, Client, Error};
+use clap::Parser;
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 struct Opt {
     /// The AWS Region.
     #[structopt(short, long)]
@@ -154,7 +157,7 @@ struct Opt {
 async fn main() -> Result<(), Error> {
     tracing_subscriber::fmt::init();
 
-    let Opt { region, verbose } = Opt::from_args();
+    let Opt { region, verbose } = Opt::parse();
 
     let region_provider = RegionProviderChain::first_try(region.map(Region::new))
         .or_default_provider()

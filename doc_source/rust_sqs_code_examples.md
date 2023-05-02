@@ -8,16 +8,16 @@
 
 The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with Amazon SQS\.
 
-*Actions* are code excerpts that show you how to call individual Amazon SQS functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon SQS functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w14aac14b9c63c13)
++ [Actions](#actions)
 
-## Actions<a name="w14aac14b9c63c13"></a>
+## Actions<a name="actions"></a>
 
 ### List queues<a name="sqs_ListQueues_rust_topic"></a>
 
@@ -25,43 +25,17 @@ The following code example shows how to list Amazon SQS queues\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
-  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
+Retrieve the first Amazon SQS queue listed in the Region\.  
 
 ```
-async fn send_receive(client: &Client) -> Result<(), Error> {
+async fn find_first_queue(client: &Client) -> Result<String, Error> {
     let queues = client.list_queues().send().await?;
     let queue_urls = queues.queue_urls().unwrap_or_default();
-    let queue_url = match queue_urls.first() {
-        Some(url) => url,
-        None => {
-            eprintln!("No queues in this account. Please create a queue to proceed");
-            exit(1);
-        }
-    };
-
-    println!(
-        "Sending and receiving messages on with URL: `{}`",
-        queue_url
-    );
-
-    let rsp = client
-        .send_message()
-        .queue_url(queue_url)
-        .message_body("hello from my queue")
-        .message_group_id("MyGroup")
-        .send()
-        .await?;
-
-    println!("Response from sending a message: {:#?}", rsp);
-
-    let rcv_message_output = client.receive_message().queue_url(queue_url).send().await?;
-
-    for message in rcv_message_output.messages.unwrap_or_default() {
-        println!("Got the message: {:#?}", message);
-    }
-
-    Ok(())
+    Ok(queue_urls
+        .first()
+        .expect("No queues in this account and Region. Create a queue to proceed.")
+        .to_string())
 }
 ```
 +  For API details, see [ListQueues](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
@@ -72,37 +46,14 @@ The following code example shows how to receive messages from an Amazon SQS queu
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
 ```
-async fn send_receive(client: &Client) -> Result<(), Error> {
-    let queues = client.list_queues().send().await?;
-    let queue_urls = queues.queue_urls().unwrap_or_default();
-    let queue_url = match queue_urls.first() {
-        Some(url) => url,
-        None => {
-            eprintln!("No queues in this account. Please create a queue to proceed");
-            exit(1);
-        }
-    };
-
-    println!(
-        "Sending and receiving messages on with URL: `{}`",
-        queue_url
-    );
-
-    let rsp = client
-        .send_message()
-        .queue_url(queue_url)
-        .message_body("hello from my queue")
-        .message_group_id("MyGroup")
-        .send()
-        .await?;
-
-    println!("Response from sending a message: {:#?}", rsp);
-
+async fn receive(client: &Client, queue_url: &String) -> Result<(), Error> {
     let rcv_message_output = client.receive_message().queue_url(queue_url).send().await?;
+
+    println!("Messages from queue with url: {}", queue_url);
 
     for message in rcv_message_output.messages.unwrap_or_default() {
         println!("Got the message: {:#?}", message);
@@ -119,41 +70,24 @@ The following code example shows how to send a message to an Amazon SQS queue\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/sqs#code-examples)\. 
   
 
 ```
-async fn send_receive(client: &Client) -> Result<(), Error> {
-    let queues = client.list_queues().send().await?;
-    let queue_urls = queues.queue_urls().unwrap_or_default();
-    let queue_url = match queue_urls.first() {
-        Some(url) => url,
-        None => {
-            eprintln!("No queues in this account. Please create a queue to proceed");
-            exit(1);
-        }
-    };
-
-    println!(
-        "Sending and receiving messages on with URL: `{}`",
-        queue_url
-    );
+async fn send(client: &Client, queue_url: &String, message: &SQSMessage) -> Result<(), Error> {
+    println!("Sending message to queue with URL: {}", queue_url);
 
     let rsp = client
         .send_message()
         .queue_url(queue_url)
-        .message_body("hello from my queue")
-        .message_group_id("MyGroup")
+        .message_body(&message.body)
+        .message_group_id(&message.group)
+        // If the queue is FIFO, you need to set .message_deduplication_id
+        // or configure the queue for ContentBasedDeduplication.
         .send()
         .await?;
 
-    println!("Response from sending a message: {:#?}", rsp);
-
-    let rcv_message_output = client.receive_message().queue_url(queue_url).send().await?;
-
-    for message in rcv_message_output.messages.unwrap_or_default() {
-        println!("Got the message: {:#?}", message);
-    }
+    println!("Send message to the queue: {:#?}", rsp);
 
     Ok(())
 }

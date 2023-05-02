@@ -8,17 +8,94 @@
 
 The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for Rust with IAM\.
 
-*Actions* are code excerpts that show you how to call individual IAM functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple IAM functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
-**Topics**
-+ [Actions](#w14aac14b9c37c13)
-+ [Scenarios](#w14aac14b9c37c15)
+**Get started**
 
-## Actions<a name="w14aac14b9c37c13"></a>
+## Hello IAM<a name="example_iam_Hello_section"></a>
+
+The following code examples show how to get started using IAM\.
+
+**SDK for Rust**  
+This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+From src/bin/hello\.rs\.  
+
+```
+use aws_sdk_iam::error::SdkError;
+use aws_sdk_iam::operation::list_policies::ListPoliciesError;
+use clap::Parser;
+
+const PATH_PREFIX_HELP: &str = "The path prefix for filtering the results.";
+
+#[derive(Debug, clap::Parser)]
+#[command(about)]
+struct HelloScenarioArgs {
+    #[arg(long, default_value="/", help=PATH_PREFIX_HELP)]
+    pub path_prefix: String,
+}
+
+#[tokio::main]
+async fn main() -> Result<(), SdkError<ListPoliciesError>> {
+    let sdk_config = aws_config::load_from_env().await;
+    let client = aws_sdk_iam::Client::new(&sdk_config);
+
+    let args = HelloScenarioArgs::parse();
+
+    iam_service::list_policies(client, args.path_prefix).await?;
+
+    Ok(())
+}
+```
+From src/iam\-service\-lib\.rs\.  
+
+```
+pub async fn list_policies(
+    client: iamClient,
+    path_prefix: String,
+) -> Result<Vec<String>, SdkError<ListPoliciesError>> {
+    let mut list_policies = client
+        .list_policies()
+        .path_prefix(path_prefix)
+        .scope(PolicyScopeType::Local)
+        .into_paginator()
+        .send();
+
+    let mut v = Vec::new();
+
+    while let Some(list_policies_output) = list_policies.next().await {
+        match list_policies_output {
+            Ok(list_policies) => {
+                if let Some(policies) = list_policies.policies() {
+                    for policy in policies {
+                        let policy_name = policy
+                            .policy_name()
+                            .unwrap_or("Missing policy name.")
+                            .to_string();
+                        println!("{}", policy_name);
+                        v.push(policy_name);
+                    }
+                }
+            }
+
+            Err(err) => return Err(err),
+        }
+    }
+
+    Ok(v)
+}
+```
++  For API details, see [ListPolicies](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
+
+**Topics**
++ [Actions](#actions)
++ [Scenarios](#scenarios)
+
+## Actions<a name="actions"></a>
 
 ### Attach a policy to a role<a name="iam_AttachRolePolicy_rust_topic"></a>
 
@@ -26,7 +103,7 @@ The following code example shows how to attach an IAM policy to a role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -47,11 +124,14 @@ pub async fn attach_role_policy(
 
 ### Attach a policy to a user<a name="iam_AttachUserPolicy_rust_topic"></a>
 
-The following code example shows how to attach an IAM policy to a user\.
+The following code example shows how to attach an IAM policy to a user\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -78,7 +158,7 @@ The following code example shows how to create an IAM policy\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -104,7 +184,7 @@ The following code example shows how to create an IAM role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -136,7 +216,7 @@ The following code example shows how to create an IAM service\-linked role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -161,11 +241,14 @@ pub async fn create_service_linked_role(
 
 ### Create a user<a name="iam_CreateUser_rust_topic"></a>
 
-The following code example shows how to create an IAM user\.
+The following code example shows how to create an IAM user\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -179,11 +262,14 @@ pub async fn create_user(client: &iamClient, user_name: &str) -> Result<User, ia
 
 ### Create an access key<a name="iam_CreateAccessKey_rust_topic"></a>
 
-The following code example shows how to create an IAM access key\.
+The following code example shows how to create an IAM access key\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -217,7 +303,7 @@ The following code example shows how to delete an IAM policy\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -238,26 +324,20 @@ The following code example shows how to delete an IAM role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
 pub async fn delete_role(client: &iamClient, role: &Role) -> Result<(), iamError> {
     let role = role.clone();
-    loop {
-        match client
-            .delete_role()
-            .role_name(role.role_name.as_ref().unwrap())
-            .send()
-            .await
-        {
-            Ok(_) => {
-                break;
-            }
-            Err(_) => {
-                sleep(Duration::from_secs(2)).await;
-            }
-        }
+    while client
+        .delete_role()
+        .role_name(role.role_name.as_ref().unwrap())
+        .send()
+        .await
+        .is_err()
+    {
+        sleep(Duration::from_secs(2)).await;
     }
     Ok(())
 }
@@ -270,7 +350,7 @@ The following code example shows how to delete an IAM service\-linked role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -291,11 +371,14 @@ pub async fn delete_service_linked_role(
 
 ### Delete a user<a name="iam_DeleteUser_rust_topic"></a>
 
-The following code example shows how to delete an IAM user\.
+The following code example shows how to delete an IAM user\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -331,11 +414,14 @@ pub async fn delete_user(client: &iamClient, user: &User) -> Result<(), SdkError
 
 ### Delete an access key<a name="iam_DeleteAccessKey_rust_topic"></a>
 
-The following code example shows how to delete an IAM access key\.
+The following code example shows how to delete an IAM access key\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -368,11 +454,14 @@ pub async fn delete_access_key(
 
 ### Delete an inline policy from a user<a name="iam_DeleteUserPolicy_rust_topic"></a>
 
-The following code example shows how to delete an inline IAM policy from a user\.
+The following code example shows how to delete an inline IAM policy from a user\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -399,7 +488,7 @@ The following code example shows how to detach an IAM policy from a role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -422,11 +511,14 @@ pub async fn detach_role_policy(
 
 ### Detach a policy from a user<a name="iam_DetachUserPolicy_rust_topic"></a>
 
-The following code example shows how to detach an IAM policy from a user\.
+The following code example shows how to detach an IAM policy from a user\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -453,7 +545,7 @@ The following code example shows how to get an IAM role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -473,7 +565,7 @@ The following code example shows how to get the IAM account password policy\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -493,7 +585,7 @@ The following code example shows how to list SAML providers for IAM\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -513,7 +605,7 @@ The following code example shows how to list IAM groups\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -542,7 +634,7 @@ The following code example shows how to list inline policies for an IAM role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -571,25 +663,43 @@ The following code example shows how to list IAM policies\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
 pub async fn list_policies(
-    client: &iamClient,
-    path_prefix: Option<String>,
-    marker: Option<String>,
-    max_items: Option<i32>,
-) -> Result<ListPoliciesOutput, SdkError<ListPoliciesError>> {
-    let response = client
+    client: iamClient,
+    path_prefix: String,
+) -> Result<Vec<String>, SdkError<ListPoliciesError>> {
+    let mut list_policies = client
         .list_policies()
-        .set_path_prefix(path_prefix)
-        .set_marker(marker)
-        .set_max_items(max_items)
-        .send()
-        .await?;
+        .path_prefix(path_prefix)
+        .scope(PolicyScopeType::Local)
+        .into_paginator()
+        .send();
 
-    Ok(response)
+    let mut v = Vec::new();
+
+    while let Some(list_policies_output) = list_policies.next().await {
+        match list_policies_output {
+            Ok(list_policies) => {
+                if let Some(policies) = list_policies.policies() {
+                    for policy in policies {
+                        let policy_name = policy
+                            .policy_name()
+                            .unwrap_or("Missing policy name.")
+                            .to_string();
+                        println!("{}", policy_name);
+                        v.push(policy_name);
+                    }
+                }
+            }
+
+            Err(err) => return Err(err),
+        }
+    }
+
+    Ok(v)
 }
 ```
 +  For API details, see [ListPolicies](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
@@ -600,7 +710,7 @@ The following code example shows how to list policies attached to an IAM role\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -631,7 +741,7 @@ The following code example shows how to list IAM roles\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -655,11 +765,14 @@ pub async fn list_roles(
 
 ### List users<a name="iam_ListUsers_rust_topic"></a>
 
-The following code example shows how to list IAM users\.
+The following code example shows how to list IAM users\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
@@ -681,29 +794,30 @@ pub async fn list_users(
 ```
 +  For API details, see [ListUsers](https://docs.rs/releases/search?query=aws-sdk) in *AWS SDK for Rust API reference*\. 
 
-## Scenarios<a name="w14aac14b9c37c15"></a>
+## Scenarios<a name="scenarios"></a>
 
 ### Create a user and assume a role<a name="iam_Scenario_CreateUserAssumeRole_rust_topic"></a>
 
-The following code example shows how to:
-+ Create a user who has no permissions\.
+The following code example shows how to create a user and assume a role\. 
+
+**Warning**  
+To avoid security risks, don't use IAM users for authentication when developing purpose\-built software or working with real data\. Instead, use federation with an identity provider such as [AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
++ Create a user with no permissions\.
 + Create a role that grants permission to list Amazon S3 buckets for the account\.
 + Add a policy to let the user assume the role\.
-+ Assume the role and list Amazon S3 buckets using temporary credentials\.
-+ Delete the policy, role, and user\.
++ Assume the role and list S3 buckets using temporary credentials, then clean up resources\.
 
 **SDK for Rust**  
 This documentation is for an SDK in preview release\. The SDK is subject to change and should not be used in production\.
- To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview/iam#code-examples)\. 
   
 
 ```
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_iam::Error as iamError;
-use aws_sdk_iam::{Client as iamClient, Credentials as iamCredentials};
+use aws_sdk_iam::{config::Credentials as iamCredentials, config::Region, Client as iamClient};
 use aws_sdk_s3::Client as s3Client;
 use aws_sdk_sts::Client as stsClient;
-use aws_types::region::Region;
 use std::borrow::Borrow;
 use tokio::time::{sleep, Duration};
 use uuid::Uuid;
@@ -813,7 +927,7 @@ async fn run_iam_operations(
         attach_role_policy_result
     );
 
-    let inline_policy_name = &format!("{}{}", "iam_demo_inline_policy_", uuid);
+    let inline_policy_name = format!("{}{}", "iam_demo_inline_policy_", uuid);
     let inline_policy_document =
         inline_policy_document.replace("{}", assume_role_role.arn.as_ref().unwrap());
     iam_service::create_user_policy(&client, &user, &inline_policy_name, &inline_policy_document)

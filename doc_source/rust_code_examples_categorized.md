@@ -4,7 +4,7 @@
 
 --------
 
-# Single\-service actions and scenarios using SDK for Rust<a name="rust_code_examples_categorized"></a>
+# Actions and scenarios using SDK for Rust<a name="rust_code_examples_categorized"></a>
 
 The following code examples show how to perform actions and implement common scenarios by using the AWS SDK for Rust with AWS services\.
 
@@ -22,14 +22,16 @@ The following code examples show how to perform actions and implement common sce
 + [DynamoDB](rust_dynamodb_code_examples.md)
 + [Amazon EBS](rust_ebs_code_examples.md)
 + [Amazon EC2](rust_ec2_code_examples.md)
-+ [Amazon EC2 Auto Scaling](rust_auto-scaling_code_examples.md)
++ [Auto Scaling](rust_auto-scaling_code_examples.md)
 + [Amazon ECR](rust_ecr_code_examples.md)
 + [Amazon ECS](rust_ecs_code_examples.md)
 + [Amazon EKS](rust_eks_code_examples.md)
++ [AWS Glue](rust_glue_code_examples.md)
 + [IAM](rust_iam_code_examples.md)
 + [AWS IoT](rust_iot_code_examples.md)
 + [AWS KMS](rust_kms_code_examples.md)
 + [Kinesis](rust_kinesis_code_examples.md)
++ [Kinesis Data Firehose](rust_firehose_code_examples.md)
 + [MediaLive](rust_medialive_code_examples.md)
 + [MediaPackage](rust_mediapackage_code_examples.md)
 + [Amazon Polly](rust_polly_code_examples.md)
@@ -40,6 +42,7 @@ The following code examples show how to perform actions and implement common sce
 + [Amazon SES API v2](rust_sesv2_code_examples.md)
 + [Amazon SNS](rust_sns_code_examples.md)
 + [Amazon SQS](rust_sqs_code_examples.md)
++ [AWS STS](rust_sts_code_examples.md)
 + [SageMaker](rust_sagemaker_code_examples.md)
 + [Secrets Manager](rust_secrets-manager_code_examples.md)
 + [Systems Manager](rust_ssm_code_examples.md)
